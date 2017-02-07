@@ -1,6 +1,6 @@
 const initialState = {
   'open': false,
-  'page': 'default',
+  'page': 'DEFAULT',
   'title': 'Awesome-est Board Ever!'
 };
 
@@ -12,6 +12,12 @@ const drawer = (state = initialState, action) => {
     case 'CLOSE_DRAWER': {
       return {...state, open: false}
 
+    }
+    case 'CHANGE_PAGE': {
+      return {...state, page: action.page}
+    }
+    case 'CHANGE_PAGE_TITLE': {
+      return {...state, title: action.title}
     }
 
   }

@@ -2,7 +2,8 @@ import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import store from '../../stores';
-import * as action from '../../actions/drawer';
+import * as drawerAction from '../../actions/drawer';
+import * as pageAction from '../../actions/page';
 
 export default class DrawerSimpleExample extends React.Component {
 
@@ -23,22 +24,29 @@ export default class DrawerSimpleExample extends React.Component {
   }
 
   handleToggle() {
-    store.dispatch(action.toggleDrawerAction());
+    store.dispatch(drawerAction.toggleDrawerAction());
   }
 
   closeDrawer() {
-    store.dispatch(action.closeDrawerAction());
+    store.dispatch(drawerAction.closeDrawerAction());
   }
 
   membersPage() {
+    store.dispatch(pageAction.changePageAction('MEMBERS'));
+    store.dispatch(pageAction.changePageTitle('Members'));
+    this.closeDrawer();
 
   }
 
   pencilPage() {
+    store.dispatch(pageAction.changePageAction('PENCIL'));
+    store.dispatch(pageAction.changePageTitle('Pencil'));
+    this.closeDrawer();
 
   }
 
-  eraserPage() {
+  eraser() {
+    this.closeDrawer();
 
   }
 
@@ -53,10 +61,10 @@ export default class DrawerSimpleExample extends React.Component {
                 docked={false}
                 width={200}
                 onRequestChange={this.closeDrawer.bind(this)}>
-          <MenuItem>Members</MenuItem>
-          <MenuItem>Pencil</MenuItem>
-          <MenuItem>Eraser</MenuItem>
-          <MenuItem>Disconnect</MenuItem>
+          <MenuItem onTouchTap={this.membersPage.bind(this)}>Members</MenuItem>
+          <MenuItem onTouchTap={this.pencilPage.bind(this)}>Pencil</MenuItem>
+          <MenuItem onTouchTap={this.eraser.bind(this)}>Eraser</MenuItem>
+          <MenuItem onTouchTap={this.disconnect.bind(this)}>Disconnect</MenuItem>
         </Drawer>
       </div>
     );
