@@ -1,22 +1,30 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
-import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
+import React from 'react';
+import MuiThemeProvider, {getMuiTheme} from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import Bar from './templates/Bar';
+import Content from './templates/Content';
+import Drawer from './templates/Drawer';
+
+//import Drawer from 'material-ui/Drawer';
+//import MenuItem from 'material-ui/MenuItem';
 
 class AppComponent extends React.Component {
   render() {
     return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-      </div>
+      <MuiThemeProvider >
+        <div>
+          <Bar />
+          <Drawer/>
+          <Content />
+        </div>
+      </MuiThemeProvider>
+
     );
   }
 }
-
-AppComponent.defaultProps = {
-};
 
 export default AppComponent;
