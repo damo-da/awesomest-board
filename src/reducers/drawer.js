@@ -2,8 +2,6 @@ const initialState = {
   'open': false,
   'page': 'DEFAULT',
   'title': 'Awesome-est Board Ever!',
-  'pencil': {}
-
 };
 
 const drawer = (state = initialState, action) => {
