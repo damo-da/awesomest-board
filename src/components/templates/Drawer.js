@@ -4,22 +4,15 @@ import MenuItem from 'material-ui/MenuItem';
 import store from '../../stores';
 import * as drawerAction from '../../actions/drawer';
 import * as pageAction from '../../actions/page';
+import {connect} from 'react-redux';
 
-export default class DrawerSimpleExample extends React.Component {
+class CustomDrawer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {open: false};
   }
 
   componentWillMount() {
-    store.subscribe(()=> {
-      const state = store.getState();
-
-      this.setState({
-        open: state.open
-      });
-    })
 
   }
 
@@ -33,14 +26,12 @@ export default class DrawerSimpleExample extends React.Component {
 
   membersPage() {
     store.dispatch(pageAction.changePageAction('MEMBERS'));
-    store.dispatch(pageAction.changePageTitle('Members'));
     this.closeDrawer();
 
   }
 
   pencilPage() {
     store.dispatch(pageAction.changePageAction('PENCIL'));
-    store.dispatch(pageAction.changePageTitle('Pencil'));
     this.closeDrawer();
 
   }
@@ -51,13 +42,14 @@ export default class DrawerSimpleExample extends React.Component {
   }
 
   disconnect() {
+    this.closeDrawer();
 
   }
 
   render() {
     return (
       <div>
-        <Drawer open={this.state.open}
+        <Drawer open={this.props.open}
                 docked={false}
                 width={200}
                 onRequestChange={this.closeDrawer.bind(this)}>
@@ -70,3 +62,14 @@ export default class DrawerSimpleExample extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  if(!state)state = {};
+  return {
+    open: state.open
+  }
+};
+
+export default connect(
+  mapStateToProps
+)(CustomDrawer);
