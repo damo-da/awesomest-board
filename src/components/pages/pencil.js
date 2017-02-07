@@ -32,9 +32,9 @@ class PencilPage extends Component{
             cellHeight={180}
             style={styles.gridList}
           >
-            {brushesData.map((tile) => (
+            {brushesData.map((tile, i) => (
               <GridTile
-                key={tile.img}
+                key={i}
                 title={tile.title}
               >
                 <img src={tile.img} />
