@@ -1,5 +1,4 @@
 const initialState = {
-  'user': {
     members: [
       {'name': "Sinestro", admin: false, id: 101},
       {'name': "Hal Jordan", admin: false, id: 100},
@@ -8,8 +7,7 @@ const initialState = {
       {'name': "Barry Allen", admin: false, id: 3},
       {'name': "Goku", admin: true, id: 100000}
     ],
-    currentUserId: 1
-  }
+    currentUserId: 100000
 };
 
 const drawer = (state = initialState, action) => {
@@ -19,7 +17,6 @@ const drawer = (state = initialState, action) => {
     }
 
   }
-
 };
 
 export default drawer;
