@@ -1,6 +1,9 @@
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import drawer from '../reducers/drawer';
+import user from '../reducers/user';
 
-const  store = createStore(drawer);
+const rootReducer = combineReducers({info: drawer, user});
+
+const  store = createStore(rootReducer);
 
 export default store;

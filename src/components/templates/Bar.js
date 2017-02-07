@@ -47,14 +47,7 @@ Bar.defaultProps = {
 };
 
 
-const mapStateToProps = (state) => {
-  if(!state)state = {};
-
-  return {
-      title: state.title,
-      page: state.page
-    }
-};
+const mapStateToProps = (state) => state.info;
 
 export default connect(
   mapStateToProps

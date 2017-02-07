@@ -5,28 +5,13 @@ import LoginPage from '../pages/login';
 import DefaultPage from '../pages/default';
 import MembersPage from '../pages/members';
 import PencilPage from '../pages/pencil';
+import {connect} from "react-redux";
 /**
  * The body of the page goes here
  **/
-export default class Content extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 'DEFAULT'
-    };
-
-  }
-
-  componentWillMount() {
-    store.subscribe(()=> {
-      const state = store.getState();
-
-      this.setState({'page': state.page});
-    })
-  }
-
+class Content extends Component {
   getElement() {
-    switch (this.state.page) {
+    switch (this.props.page) {
       case 'PENCIL': {
         return <PencilPage/>
       }
@@ -48,9 +33,14 @@ export default class Content extends Component {
       <div>
         {element}
       </div>
-
-
     )
   }
 
 }
+
+
+const mapStateToProps = (state) => state.info;
+
+export default connect(
+  mapStateToProps
+)(Content);

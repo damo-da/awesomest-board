@@ -63,12 +63,7 @@ class CustomDrawer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  if(!state)state = {};
-  return {
-    open: state.open
-  }
-};
+const mapStateToProps = (state) => state.info;
 
 export default connect(
   mapStateToProps

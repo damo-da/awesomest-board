@@ -1,12 +1,14 @@
 const initialState = {
   'open': false,
   'page': 'DEFAULT',
-  'title': 'Awesome-est Board Ever!'
+  'title': 'Awesome-est Board Ever!',
+  'pencil': {}
+
 };
 
 const drawer = (state = initialState, action) => {
   switch (action.type) {
-    case 'TOGGLE_DRAWER':{
+    case 'TOGGLE_DRAWER': {
       return {...state, open: !state.open}
     }
     case 'CLOSE_DRAWER': {
@@ -18,18 +20,19 @@ const drawer = (state = initialState, action) => {
       const newState = {...state, page: action.page};
 
       //change page title
-      if(newState.page == "DEFAULT")newState.title = initialState.title;
-      else if(newState.page == 'MEMBERS') newState.title = "Members";
-      else if(newState.page == "PENCIL") newState.title = "Pencil";
-      else if(newState.page == "LOGIN") newState.title = "Login";
+      if (newState.page == "DEFAULT")newState.title = initialState.title;
+      else if (newState.page == 'MEMBERS') newState.title = "Members";
+      else if (newState.page == "PENCIL") newState.title = "Pencil";
+      else if (newState.page == "LOGIN") newState.title = "Login";
 
       return newState;
     }
     case 'CHANGE_PAGE_TITLE': {
       return {...state, title: action.title}
     }
-
   }
+
+  return state === undefined? initialState: state;
 };
 
 export default drawer;
