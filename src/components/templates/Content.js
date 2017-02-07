@@ -6,6 +6,13 @@ import DefaultPage from '../pages/default';
 import MembersPage from '../pages/members';
 import PencilPage from '../pages/pencil';
 import {connect} from "react-redux";
+
+const style = {
+  page: {
+    marginLeft: 25
+  }
+};
+
 /**
  * The body of the page goes here
  **/
@@ -30,7 +37,7 @@ class Content extends Component {
   render() {
     const element = this.getElement();
     return (
-      <div>
+      <div style={style.page}>
         {element}
       </div>
     )

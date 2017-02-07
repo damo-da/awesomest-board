@@ -12,8 +12,10 @@ class MembersPage extends Component{
   }
 
   render(){
+    const currentUser = this.props.members.find((x) => x.id === this.props.currentUserId);
+
     const members = this.props.members.map((member) => {
-        return <SingleMember key={member.id} member={member} currentUserId={this.props.currentUserId} onKick={this.kickMember.bind(this, member)}/>;
+        return <SingleMember key={member.id} member={member} currentUser={currentUser} onKick={this.kickMember.bind(this, member)}/>;
     });
     return (
       <div>

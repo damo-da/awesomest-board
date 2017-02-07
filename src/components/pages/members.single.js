@@ -32,9 +32,11 @@ export default class SingleMember extends Component{
   isKickable(){
     const member = this.props.member;
 
+    if (!this.props.currentUser.admin) return false; //self is not admin. can not kick anyone
+
     if(member.admin)return false;//can not kick admin
 
-    if(this.props.currentUserId == member.id)return false; //can not kick self
+    if(this.props.currentUser.id == member.id)return false; //can not kick self
 
     return true;
   }
@@ -46,7 +48,7 @@ export default class SingleMember extends Component{
           title={this.props.member.name}>
 
           {/*current user chip*/}
-          {this.props.currentUserId == this.props.member.id &&
+          {this.props.currentUser.id === this.props.member.id &&
           <Chip
             style={styles.chip} backgroundColor={green300}>
             YOU
@@ -78,4 +80,4 @@ export default class SingleMember extends Component{
   }
 
 }
-SingleMember.defaultProps = {member:{}, currentUserId:0, onKick: ()=>{}};
+SingleMember.defaultProps = {member:{}, currentUser:{}, onKick: ()=>{}};
