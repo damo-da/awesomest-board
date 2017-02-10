@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Slider from 'material-ui/Slider';
-import brushesData from '../../brushes';
+import {getPencilsData} from '../../pencils';
 import { CirclePicker } from 'react-color';
 
 const WIDTH_1 = 350;
@@ -20,11 +20,12 @@ const styles = {
 
 
 class PencilPage extends Component{
+  pencils = getPencilsData();
 
   render(){
     return (
       <div>
-        <h1>Choose Pencil</h1>
+        <h1>Choose Brush</h1>
 
         {/*Grid*/}
         <div style={styles.root}>
@@ -32,7 +33,7 @@ class PencilPage extends Component{
             cellHeight={180}
             style={styles.gridList}
           >
-            {brushesData.map((tile, i) => (
+            {this.pencils.map((tile, i) => (
               <GridTile
                 key={i}
                 title={tile.title}

@@ -1,5 +1,5 @@
 const tilesData = [
-  {
+    {
     img: 'https://img.clipartfest.com/475ce5a44bd1ff0b8da65ce9ed7d4aad_art-brush-clipart-1-clipart-artist-brush_197-130.png',
     title: 'Breakfast',
     author: 'jill111',

@@ -1,6 +1,6 @@
 const initialState = {
   size: 10,
-  template: "DEFAULT",
+  pencil: "DEFAULT",
   color: "#ff0000"
 };
 
