@@ -2,10 +2,10 @@
 Awesome-est board of the century
 
 # Installation:
-`npm start`
+`npm install`
 
 # Running 
-`npm start`
+`npm start` and go to `http://localhost:8000`
 
 # Info
 Generated using `yo`: `yo react-webpack`. [Link to repo](https://github.com/react-webpack-generators/generator-react-webpack.git)
