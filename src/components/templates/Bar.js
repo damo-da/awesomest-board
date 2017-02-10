@@ -7,6 +7,12 @@ import {connect} from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import Menu from 'material-ui/svg-icons/navigation/menu';
+import IconMenu from 'material-ui/IconMenu';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import MenuItem from 'material-ui/MenuItem';
+import PencilIcon from 'material-ui/svg-icons/image/brush';
+import EraserIcon from 'material-ui/svg-icons/action/flip-to-front';
+import MembersIcon from 'material-ui/svg-icons/social/people';
 
 class Bar extends Component {
   constructor(props) {
@@ -16,6 +22,26 @@ class Bar extends Component {
 
   showDrawer() {
     store.dispatch(toggleDrawerAction())
+  }
+
+  showPencilOptions(){
+    store.dispatch(pageActions.showDialog("PENCIL"))
+
+  }
+
+  eraser(){
+    store.dispatch(pageActions.showDialog("ERASER"))
+
+  }
+
+  members(){
+    store.dispatch(pageActions.showDialog("MEMBERS"))
+
+  }
+
+  disconnect(){
+    store.dispatch(pageActions.showDialog("DISCONNECT"))
+
   }
 
   onClickLeftIconButton(){
@@ -29,13 +55,20 @@ class Bar extends Component {
   render() {
     return <AppBar
       title={this.props.title}
-      iconClassNameRight="muidocs-icon-navigation-expand-more"
       iconElementLeft={<IconButton>
         {this.props.page == "DEFAULT"?
           <Menu/>:
           <NavigationClose />
         }
       </IconButton>}
+      iconElementRight={<div>
+        <IconButton onTouchTap={this.showPencilOptions.bind(this)}><PencilIcon /></IconButton>
+        <IconButton><EraserIcon onTouchTap={this.eraser.bind(this)}/></IconButton>
+        <IconButton><MembersIcon onTouchTap={this.members.bind(this)}/></IconButton>
+        <IconButton><NavigationClose onTouchTap={this.disconnect.bind(this)}/></IconButton>
+        </div>
+      }
+
       onLeftIconButtonTouchTap={this.onClickLeftIconButton.bind(this)}
     />
   }

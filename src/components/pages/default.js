@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
 import * as ReactDOM from "react-dom";
 import * as drawAction from '../../actions/draw';
+import * as pageAction from '../../actions/page';
 import {connect} from 'react-redux';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import store from '../../stores';
 
-const PAGE_WIDTH = 500;
-const PAGE_HEIGHT = 500;
+import Pencil from './pencil'
+import Members from './members'
+
+const PAGE_WIDTH = 700;
+const PAGE_HEIGHT = 700;
 
 class DefaultPage extends Component{
   pressed = false;
@@ -22,6 +29,10 @@ class DefaultPage extends Component{
 
     drawAction.initCanvas(this.canvas, PAGE_WIDTH, PAGE_HEIGHT);
 
+  }
+
+  handleClose(){
+    store.dispatch(pageAction.showDialog(""))
   }
 
   getMousePos(e){
@@ -72,12 +83,46 @@ class DefaultPage extends Component{
     drawAction.mouseUp(mouseX, mouseY, this.props.pencil);
   }
 
+  createDialog(content, title="Board"){
+    return <Dialog
+      title={title}
+      actions={<FlatButton
+        label="DONE"
+        primary={true}
+        onTouchTap={this.handleClose.bind(this)}
+      />}
+      modal={false}
+      open={true}
+      onRequestClose={this.handleClose.bind(this)}
+    >
+      {content}
+    </Dialog>
+
+  }
+
+  getOpenDialog(){
+    switch(this.props.info.dialog){
+      case "PENCIL": {
+        return this.createDialog(<Pencil/>, "Pencil")
+      }
+      case "MEMBERS": {
+        return this.createDialog(<Members />, "Members")
+      }
+      default: {
+        return null
+      }
+    }
+  }
+
   render(){
     return (
       <div>
         <h1>Draw</h1>
 
         <canvas ref='canvas'  style={{width:PAGE_WIDTH, height:PAGE_HEIGHT}}/>
+
+        {this.getOpenDialog()}
+
       </div>
     )
 
@@ -85,7 +130,8 @@ class DefaultPage extends Component{
 }
 
 const mapStateToProps = (state) => ({
-  pencil: state.pencil
+  pencil: state.pencil,
+  info: state.info
 });
 
 export default connect(mapStateToProps)(DefaultPage);

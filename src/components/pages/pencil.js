@@ -4,8 +4,11 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import Slider from 'material-ui/Slider';
 import {getPencilsData} from '../../pencils';
 import { CirclePicker } from 'react-color';
+import store from '../../stores';
+import * as pencilActions from '../../actions/pencil';
 
 const WIDTH_1 = 350;
+const BRUSH_SIZE_MULTIPLIER = 70; // when slider is full, pencil becomes 70 pixels
 
 const styles = {
   root: {
@@ -21,6 +24,14 @@ const styles = {
 
 class PencilPage extends Component{
   pencils = getPencilsData();
+
+  handleColorChange = (color)=>{
+    store.dispatch(pencilActions.changedColor(color.hex))
+  };
+
+  handleSizeChange = (e, size)=>{
+    store.dispatch(pencilActions.changedSize(size * BRUSH_SIZE_MULTIPLIER))
+  };
 
   render(){
     return (
@@ -46,10 +57,12 @@ class PencilPage extends Component{
 
         {/*Size of brush*/}
         Brush Size
-        <Slider defaultValue={0.5} style={{width:WIDTH_1}} />
+        <Slider defaultValue={this.props.size / BRUSH_SIZE_MULTIPLIER} style={{width:WIDTH_1}} onChange={ this.handleSizeChange } />
 
         {/*Color*/}
-        <CirclePicker/>
+        <CirclePicker
+          color={this.props.color}
+          onChangeComplete={this.handleColorChange}/>
 
       </div>
 

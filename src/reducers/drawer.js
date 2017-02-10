@@ -1,6 +1,7 @@
 const initialState = {
   'open': false,
   'page': 'DEFAULT',
+  'dialog': '',
   'title': 'Awesome-est Board Ever!',
 };
 
@@ -27,6 +28,9 @@ const drawer = (state = initialState, action) => {
     }
     case 'CHANGE_PAGE_TITLE': {
       return {...state, title: action.title}
+    }
+    case 'OPEN_DIALOG': {
+      return {...state, dialog: action.dialog}
     }
   }
 
