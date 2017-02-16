@@ -1,9 +1,12 @@
 import {getPencilById} from '../pencils';
+
 let canvas = null;
 let ctx = null;
 
 let width = 500;
 let height = 500;
+
+window.lastEvent = {}; // this stores the data for the last event by userId
 
 export const initCanvas = (c, w, h) => {
   canvas = c;
@@ -22,22 +25,17 @@ export const initCanvas = (c, w, h) => {
   ctx.fillStyle = 'rgb(200,500,200)';
 };
 
-const draw = (x, y, pencilId="DEFAULT", size=10, color="#0000ff") => {
+const draw = (x, y, pencilId="DEFAULT", size=10, color="#0000ff", type="", userId=0) => {
   const pencil = getPencilById(pencilId);
 
-  pencil.draw(ctx, {x, y, size, color});
+  const event = {x, y, size, color, type, lastEvent: window.lastEvent[userId]};
+
+  window.lastEvent[userId] = event;
+
+  pencil.draw(ctx, event);
 };
 
-export const mouseDown = (x, y, pencilData) => {
-  draw(x, y, pencilData.pencil, pencilData.size, pencilData.color);
-
-};
-
-export const mouseMove = (x, y, pencilData) => {
-  draw(x, y, pencilData.pencil, pencilData.size, pencilData.color);
-};
-
-
-export const mouseUp = (x, y, pencilData) => {
+export const runEvent = (action, x, y, pencilData, userId=0) => {
+  draw(x, y, pencilData.pencil, pencilData.size, pencilData.color, action, userId);
 
 };

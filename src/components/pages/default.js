@@ -10,6 +10,8 @@ import store from '../../stores';
 import Pencil from './pencil'
 import Members from './members'
 
+import C from '../../constants';
+
 const PAGE_WIDTH = 700;
 const PAGE_HEIGHT = 700;
 
@@ -28,7 +30,6 @@ class DefaultPage extends Component{
     this.setListeners();
 
     drawAction.initCanvas(this.canvas, PAGE_WIDTH, PAGE_HEIGHT);
-
   }
 
   handleClose(){
@@ -64,7 +65,7 @@ class DefaultPage extends Component{
     this.pressed = true;
 
     const {mouseX, mouseY} = this.getMousePos(e);
-    drawAction.mouseDown(mouseX, mouseY, this.props.pencil);
+    drawAction.runEvent(C.MOUSE_DOWN, mouseX, mouseY, this.props.pencil);
   }
 
   //onMouseMove, onTouchMove, whatever
@@ -72,7 +73,7 @@ class DefaultPage extends Component{
     if(!this.pressed) return;
 
     const {mouseX, mouseY} = this.getMousePos(e);
-    drawAction.mouseMove(mouseX, mouseY, this.props.pencil);
+    drawAction.runEvent(C.MOUSE_MOVE, mouseX, mouseY, this.props.pencil);
   }
 
   //onMouseUp, onTouchUp, whatever
@@ -80,7 +81,7 @@ class DefaultPage extends Component{
     this.pressed = false;
 
     const {mouseX, mouseY} = this.getMousePos(e);
-    drawAction.mouseUp(mouseX, mouseY, this.props.pencil);
+    drawAction.runEvent(C.MOUSE_UP, mouseX, mouseY, this.props.pencil);
   }
 
   createDialog(content, title="Board"){
