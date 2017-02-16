@@ -1,6 +1,6 @@
 export const changedColor = (color) => {
   return {
-    type: "CHANGED_PENCIL_COLOR",
+    type: 'CHANGED_PENCIL_COLOR',
     color: color
   }
 };

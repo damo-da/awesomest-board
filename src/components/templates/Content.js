@@ -1,11 +1,10 @@
-import React, {Component} from "react";
-import store from '../../stores';
+import React, {Component} from 'react';
 
 import LoginPage from '../pages/login';
 import DefaultPage from '../pages/default';
 import MembersPage from '../pages/members';
 import PencilPage from '../pages/pencil';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 
 const style = {
   page: {

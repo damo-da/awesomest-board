@@ -7,8 +7,7 @@ import SingleMember from './members.single';
 class MembersPage extends Component{
 
   kickMember(member){
-    console.log("kicking", member.name);
-    alert("Kicking "+ member.name);
+    alert('Kicking '+ member.name);
   }
 
   render(){

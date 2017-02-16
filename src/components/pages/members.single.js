@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardHeader} from 'material-ui/Card';
 import Chip from 'material-ui/Chip';
-import {blue300, indigo900, green300} from 'material-ui/styles/colors';
+import {blue300, green300} from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
@@ -10,7 +9,7 @@ const styles = {
   chip: {
     display: 'inline',
     margin: 4,
-    padding: 4,
+    padding: 4
   }
 };
 
@@ -23,9 +22,9 @@ export default class SingleMember extends Component{
   }
 
   getSubtitle(){
-    if (this.props.member.admin)return "ADMIN";
+    if (this.props.member.admin)return 'ADMIN';
 
-    return "Member";
+    return 'Member';
   }
   componentWillMount(){
   }

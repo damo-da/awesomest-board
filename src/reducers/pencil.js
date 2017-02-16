@@ -1,7 +1,7 @@
 const initialState = {
   size: 10,
-  pencil: "DEFAULT",
-  color: "#f44336"
+  pencil: 'DEFAULT',
+  color: '#f44336'
 };
 
 const pencil = (state = initialState, action) => {

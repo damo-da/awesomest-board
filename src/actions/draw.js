@@ -25,7 +25,7 @@ export const initCanvas = (c, w, h) => {
   ctx.fillStyle = 'rgb(200,500,200)';
 };
 
-const draw = (x, y, pencilId="DEFAULT", size=10, color="#0000ff", type="", userId=0) => {
+const draw = (x, y, pencilId='DEFAULT', size=10, color='#0000ff', type='', userId=0) => {
   const pencil = getPencilById(pencilId);
 
   const event = {x, y, size, color, type, lastEvent: window.lastEvent[userId]};

@@ -14,7 +14,7 @@ export const changePageTitle = (title) => {
 
 export const showDialog = (name) => {
   return {
-    type: "OPEN_DIALOG",
+    type: 'OPEN_DIALOG',
     dialog: name
   }
-}
+};

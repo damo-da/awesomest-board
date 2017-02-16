@@ -15,11 +15,9 @@ const styles = {
     marginBottom: 20
   },
   gridList: {
-    width: 500,
-  },
+    width: 500
+  }
 };
-
-
 
 
 class PencilPage extends Component{

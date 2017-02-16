@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from 'react-dom';
 import * as drawAction from '../../actions/draw';
 import * as pageAction from '../../actions/page';
 import {connect} from 'react-redux';
@@ -18,7 +18,6 @@ const PAGE_HEIGHT = 700;
 class DefaultPage extends Component{
   pressed = false;
 
-  ctx = null;
   canvas = null;
 
   width = PAGE_WIDTH;
@@ -33,7 +32,7 @@ class DefaultPage extends Component{
   }
 
   handleClose(){
-    store.dispatch(pageAction.showDialog(""))
+    store.dispatch(pageAction.showDialog(''))
   }
 
   getMousePos(e){
@@ -55,9 +54,9 @@ class DefaultPage extends Component{
   }
 
   setListeners(){
-    this.canvas.addEventListener("mousedown", this.onPressDown.bind(this), false);
-    this.canvas.addEventListener("mouseup", this.onPressUp.bind(this), false);
-    this.canvas.addEventListener("mousemove", this.onMove.bind(this), false);
+    this.canvas.addEventListener('mousedown', this.onPressDown.bind(this), false);
+    this.canvas.addEventListener('mouseup', this.onPressUp.bind(this), false);
+    this.canvas.addEventListener('mousemove', this.onMove.bind(this), false);
   }
 
   //onMouseDown, onTouchDown, whatever
@@ -84,7 +83,7 @@ class DefaultPage extends Component{
     drawAction.runEvent(C.MOUSE_UP, mouseX, mouseY, this.props.pencil);
   }
 
-  createDialog(content, title="Board"){
+  createDialog(content, title='Board'){
     return <Dialog
       title={title}
       actions={<FlatButton
@@ -103,11 +102,11 @@ class DefaultPage extends Component{
 
   getOpenDialog(){
     switch(this.props.info.dialog){
-      case "PENCIL": {
-        return this.createDialog(<Pencil/>, "Pencil")
+      case 'PENCIL': {
+        return this.createDialog(<Pencil/>, 'Pencil')
       }
-      case "MEMBERS": {
-        return this.createDialog(<Members />, "Members")
+      case 'MEMBERS': {
+        return this.createDialog(<Members />, 'Members')
       }
       default: {
         return null

@@ -1,6 +1,6 @@
 export const toggleDrawerAction = () => {
   return {
-    type: 'TOGGLE_DRAWER',
+    type: 'TOGGLE_DRAWER'
   }
 
 };

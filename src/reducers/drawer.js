@@ -2,7 +2,7 @@ const initialState = {
   'open': false,
   'page': 'DEFAULT',
   'dialog': '',
-  'title': 'Awesome-est Board Ever!',
+  'title': 'Awesome-est Board Ever!'
 };
 
 const drawer = (state = initialState, action) => {
@@ -19,10 +19,10 @@ const drawer = (state = initialState, action) => {
       const newState = {...state, page: action.page};
 
       //change page title
-      if (newState.page == "DEFAULT")newState.title = initialState.title;
-      else if (newState.page == 'MEMBERS') newState.title = "Members";
-      else if (newState.page == "PENCIL") newState.title = "Pencil";
-      else if (newState.page == "LOGIN") newState.title = "Login";
+      if (newState.page == 'DEFAULT')newState.title = initialState.title;
+      else if (newState.page == 'MEMBERS') newState.title = 'Members';
+      else if (newState.page == 'PENCIL') newState.title = 'Pencil';
+      else if (newState.page == 'LOGIN') newState.title = 'Login';
 
       return newState;
     }

@@ -7,9 +7,6 @@ import {connect} from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import Menu from 'material-ui/svg-icons/navigation/menu';
-import IconMenu from 'material-ui/IconMenu';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import MenuItem from 'material-ui/MenuItem';
 import PencilIcon from 'material-ui/svg-icons/image/brush';
 import EraserIcon from 'material-ui/svg-icons/action/flip-to-front';
 import MembersIcon from 'material-ui/svg-icons/social/people';
@@ -25,22 +22,22 @@ class Bar extends Component {
   }
 
   showPencilOptions(){
-    store.dispatch(pageActions.showDialog("PENCIL"))
+    store.dispatch(pageActions.showDialog('PENCIL'))
 
   }
 
   eraser(){
-    store.dispatch(pageActions.showDialog("ERASER"))
+    store.dispatch(pageActions.showDialog('ERASER'))
 
   }
 
   members(){
-    store.dispatch(pageActions.showDialog("MEMBERS"))
+    store.dispatch(pageActions.showDialog('MEMBERS'))
 
   }
 
   disconnect(){
-    store.dispatch(pageActions.showDialog("DISCONNECT"))
+    store.dispatch(pageActions.showDialog('DISCONNECT'))
 
   }
 
@@ -48,7 +45,7 @@ class Bar extends Component {
     if (this.props.page == 'DEFAULT'){
       this.showDrawer();
     }else{
-      store.dispatch(pageActions.changePageAction("DEFAULT"));
+      store.dispatch(pageActions.changePageAction('DEFAULT'));
     }
   }
 
@@ -56,7 +53,7 @@ class Bar extends Component {
     return <AppBar
       title={this.props.title}
       iconElementLeft={<IconButton>
-        {this.props.page == "DEFAULT"?
+        {this.props.page == 'DEFAULT'?
           <Menu/>:
           <NavigationClose />
         }
@@ -75,8 +72,8 @@ class Bar extends Component {
 
 }
 Bar.defaultProps = {
-  title: "Awesome-est Board ever!",
-  page: "DEFAULT"
+  title: 'Awesome-est Board ever!',
+  page: 'DEFAULT'
 };
 
 
