@@ -1,5 +1,5 @@
 import BasePencil from '../base';
-
+import C from '../../constants';
 
 class Pencil extends BasePencil {
   static SIZE_CONST = 0.5;
@@ -12,12 +12,25 @@ class Pencil extends BasePencil {
     ctx.fillStyle = data.color;
     ctx.strokeStyle  = data.color;
 
-    console.log(radius, data.size)
-    ctx.beginPath();
-    ctx.lineWidth=radius/2.0;
-    ctx.arc(x, y, radius,0,2*Math.PI);
-    ctx.fill();
-    ctx.stroke();
+    switch(data.type){
+      case C.MOUSE_DOWN: {
+        ctx.beginPath();
+        ctx.lineWidth=radius/2.0;
+        ctx.moveTo(x, y);
+      }
+      case C.MOUSE_MOVE:{
+        ctx.lineTo(x,y);
+        ctx.stroke();
+
+      }
+      case C.MOUSE_UP: {
+
+      }
+    }
+
+    // ctx.arc(x, y, radius,0,2*Math.PI);
+    // ctx.fill();
+    // ctx.stroke();
   }
 }
 
