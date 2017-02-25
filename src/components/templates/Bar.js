@@ -1,16 +1,33 @@
 import React, {Component} from 'react';
-import AppBar from 'material-ui/AppBar';
 import store from '../../stores';
 import {toggleDrawerAction} from '../../actions/drawer';
 import * as pageActions from '../../actions/page';
 import {connect} from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import Menu from 'material-ui/svg-icons/navigation/menu';
 import PencilIcon from 'material-ui/svg-icons/image/brush';
 import EraserIcon from 'material-ui/svg-icons/action/flip-to-front';
 import MembersIcon from 'material-ui/svg-icons/social/people';
+import ArrowDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down-circle';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
 
+const styles = {
+  arrowDown: {
+    width: 120,
+    height: 120,
+    padding: 30
+  },
+  arrowDownIcon: {
+    width: 60,
+    height: 60
+  },
+  iconMenu: {
+    position: 'absolute',
+    right: 0,
+    top: 0
+  }
+};
 class Bar extends Component {
   constructor(props) {
     super(props);
@@ -35,39 +52,22 @@ class Bar extends Component {
     store.dispatch(pageActions.showDialog('MEMBERS'))
 
   }
-
   disconnect(){
     store.dispatch(pageActions.showDialog('DISCONNECT'))
 
   }
 
-  onClickLeftIconButton(){
-    if (this.props.page == 'DEFAULT'){
-      this.showDrawer();
-    }else{
-      store.dispatch(pageActions.changePageAction('DEFAULT'));
-    }
-  }
-
   render() {
-    return <AppBar
-      title={this.props.title}
-      iconElementLeft={<IconButton>
-        {this.props.page == 'DEFAULT'?
-          <Menu/>:
-          <NavigationClose />
-        }
-      </IconButton>}
-      iconElementRight={<div>
-        <IconButton onTouchTap={this.showPencilOptions.bind(this)}><PencilIcon /></IconButton>
-        <IconButton><EraserIcon onTouchTap={this.eraser.bind(this)}/></IconButton>
-        <IconButton><MembersIcon onTouchTap={this.members.bind(this)}/></IconButton>
-        <IconButton><NavigationClose onTouchTap={this.disconnect.bind(this)}/></IconButton>
-        </div>
-      }
-
-      onLeftIconButtonTouchTap={this.onClickLeftIconButton.bind(this)}
-    />
+    return <IconMenu
+          style={styles.iconMenu}
+          iconButtonElement={<IconButton style={styles.arrowDown} iconStyle={styles.arrowDownIcon}><ArrowDownIcon style={styles.arrowDown}/></IconButton>}
+          anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}>
+          <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)} />
+          <MenuItem primaryText="Eraser" leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)} />
+          <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)} />
+          <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)} />
+        </IconMenu>
   }
 
 }

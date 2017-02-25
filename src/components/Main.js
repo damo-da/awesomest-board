@@ -8,7 +8,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import Bar from './templates/Bar';
 import Content from './templates/Content';
-import Drawer from './templates/Drawer';
 import {Provider} from 'react-redux';
 import store from '../stores';
 
@@ -19,7 +18,6 @@ class AppComponent extends React.Component {
         <Provider store={store}>
           <div>
             <Bar />
-            <Drawer/>
             <Content />
           </div>
         </Provider>
