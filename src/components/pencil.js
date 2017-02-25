@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Slider from 'material-ui/Slider';
-import {getPencilsData} from '../../pencils';
+import {getPencilsData} from '../pencils';
 import { CirclePicker } from 'react-color';
-import store from '../../stores';
-import * as pencilActions from '../../actions/pencil';
+import store from '../stores';
+import * as pencilActions from '../actions/pencil';
 
 const WIDTH_1 = 350;
 const BRUSH_SIZE_MULTIPLIER = 70; // when slider is full, pencil becomes 70 pixels

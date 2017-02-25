@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import store from '../../stores';
-import {toggleDrawerAction} from '../../actions/drawer';
-import * as pageActions from '../../actions/page';
+import store from '../stores';
+import * as pageActions from '../actions/page';
 import {connect} from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -32,10 +31,6 @@ class Bar extends Component {
   constructor(props) {
     super(props);
 
-  }
-
-  showDrawer() {
-    store.dispatch(toggleDrawerAction())
   }
 
   showPencilOptions(){

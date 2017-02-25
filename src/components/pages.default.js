@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import * as ReactDOM from 'react-dom';
-import * as drawAction from '../../actions/draw';
-import * as pageAction from '../../actions/page';
+import * as drawAction from '../actions/draw';
+import * as pageAction from '../actions/page';
 import {connect} from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import store from '../../stores';
+import store from '../stores';
 
 import Pencil from './pencil'
 import Members from './members'
 
-import C from '../../constants';
+import C from '../constants';
 
 const PAGE_WIDTH = 700;
 const PAGE_HEIGHT = 700;
