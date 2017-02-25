@@ -27,7 +27,7 @@ const styles = {
     top: 0
   }
 };
-class Bar extends Component {
+export class Bar extends Component {
   constructor(props) {
     super(props);
 
@@ -53,16 +53,24 @@ class Bar extends Component {
   }
 
   render() {
-    return <IconMenu
-          style={styles.iconMenu}
-          iconButtonElement={<IconButton style={styles.arrowDown} iconStyle={styles.arrowDownIcon}><ArrowDownIcon style={styles.arrowDown}/></IconButton>}
-          anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-          targetOrigin={{horizontal: 'right', vertical: 'top'}}>
-          <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)} />
-          <MenuItem primaryText="Eraser" leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)} />
-          <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)} />
-          <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)} />
-        </IconMenu>
+    return <div className="bar-component">
+      <IconMenu
+        style={styles.iconMenu}
+
+        iconButtonElement={
+          <IconButton style={styles.arrowDown} iconStyle={styles.arrowDownIcon}>
+            <ArrowDownIcon style={styles.arrowDown}/>
+          </IconButton>}
+
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}>
+
+        <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
+        <MenuItem primaryText="Eraser" leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)}/>
+        <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)}/>
+        <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/>
+      </IconMenu>
+    </div>
   }
 
 }

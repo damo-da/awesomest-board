@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import SingleMember from './members.single';
 
-
-//the whole page
-class MembersPage extends Component{
+export class MembersComponent extends Component{
 
   kickMember(member){
     alert('Kicking '+ member.name);
@@ -17,7 +15,7 @@ class MembersPage extends Component{
         return <SingleMember key={member.id} member={member} currentUser={currentUser} onKick={this.kickMember.bind(this, member)}/>;
     });
     return (
-      <div>
+      <div className="members-component">
         <h1>Members</h1>
         {members}
       </div>
@@ -30,4 +28,4 @@ const mapStateToProps = (state) => state.user;
 
 export default connect(
   mapStateToProps
-)(MembersPage);
+)(MembersComponent);

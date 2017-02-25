@@ -12,20 +12,22 @@ import Page from './pages.default';
 import {Provider} from 'react-redux';
 import store from '../stores';
 
-class AppComponent extends React.Component {
+class Main extends React.Component {
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-        <Provider store={store}>
-          <div>
-            <Bar />
-            <Page />
-          </div>
-        </Provider>
-      </MuiThemeProvider>
+      <div className="index">
+        <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+          <Provider store={store}>
+            <div>
+              <Bar />
+              <Page />
+            </div>
+          </Provider>
+        </MuiThemeProvider>
+      </div>
 
     );
   }
 }
 
-export default AppComponent;
+export default Main;
