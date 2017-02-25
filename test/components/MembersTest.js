@@ -7,16 +7,17 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import MainPageComponent from 'components//MainPageComponent.js';
+import { Bar } from "components/Bar";
 
-describe('MainPageComponent', () => {
+describe('Bar', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(MainPageComponent);
+    component = createComponent(Bar);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('mainpage-component');
+    expect(component.props.className).to.equal('bar-component');
   });
+
 });
