@@ -12,7 +12,7 @@ import Page from './pages.default';
 import {Provider} from 'react-redux';
 import store from '../stores';
 
-class Main extends React.Component {
+export class Main extends React.Component {
   render() {
     return (
       <div className="index">

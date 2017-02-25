@@ -14,6 +14,7 @@ module.exports = function(config) {
     captureTimeout: 60000,
     frameworks: [ 'mocha', 'chai' ],
     client: {
+      captureConsole: true,
       mocha: {}
     },
     singleRun: true,
