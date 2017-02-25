@@ -1,4 +1,4 @@
-# awesomest-board
+# awesomest-board [![Build Status](https://travis-ci.org/underscoredam/awesomest-board.svg?branch=master)](https://travis-ci.org/underscoredam/awesomest-board)
 Awesome-est board of the century
 
 # Installation:
