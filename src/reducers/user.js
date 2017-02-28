@@ -12,8 +12,14 @@ const initialState = {
 
 const drawer = (state = initialState, action) => {
   switch(action.type){
+    case 'ADD_MEMBER': {
+      const newState = {...state};
+      newState.members.push(action.member);
+      return newState;
+    }
+
     default:{
-      return {...state}
+      return state
     }
 
   }

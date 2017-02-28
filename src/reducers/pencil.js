@@ -13,11 +13,9 @@ const pencil = (state = initialState, action) => {
     case 'CHANGED_PENCIL_SIZE': {
       return {...state, size: action.size}
     }
-    default:{
-      return {...state}
-    }
-
   }
+
+  return state;
 };
 
 export default pencil;
