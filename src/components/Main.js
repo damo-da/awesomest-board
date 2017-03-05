@@ -16,7 +16,7 @@ export class Main extends React.Component {
   render() {
     return (
       <div className="index">
-        <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)} className="mui-theme">
           <Provider store={store}>
             <div>
               <Bar />
