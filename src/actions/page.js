@@ -4,3 +4,10 @@ export const showDialog = (name) => {
     dialog: name
   }
 };
+
+export const changePage = (name) => {
+  return {
+    type: 'CHANGE_PAGE',
+    page: name
+  }
+};

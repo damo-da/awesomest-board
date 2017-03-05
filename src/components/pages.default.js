@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import store from '../stores';
-
+import {changePage} from '../actions/page';
 import Pencil from './pencil'
 import Members from './members'
 
@@ -99,7 +99,11 @@ class DefaultPage extends Component{
     </Dialog>
 
   }
+  disconnectUser() {
+    this.handleClose();
 
+    store.dispatch(changePage('LOGIN'));
+  }
   getOpenDialog(){
     switch(this.props.info.dialog){
       case 'PENCIL': {
@@ -107,6 +111,25 @@ class DefaultPage extends Component{
       }
       case 'MEMBERS': {
         return this.createDialog(<Members />, 'Members')
+      }
+      case 'DISCONNECT': {
+        return <Dialog
+          title={'Are you sure?'}
+          actions={[<FlatButton
+            label="Yes"
+            primary={true}
+            onTouchTap={this.disconnectUser.bind(this)}
+          />,<FlatButton
+            label="No"
+            secondary={true}
+            onTouchTap={this.handleClose.bind(this)}
+          />]}
+          modal={false}
+          open={true}
+          onRequestClose={this.handleClose.bind(this)}
+        >
+
+        </Dialog>
       }
       default: {
         return null
