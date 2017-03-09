@@ -1,7 +1,7 @@
 const initialState = {
-    members: [
-    ],
-    currentUserId: -1,
+  members: [],
+  currentUserId: -1,
+  sess_token: ''
 };
 
 const drawer = (state = initialState, action) => {
@@ -13,9 +13,7 @@ const drawer = (state = initialState, action) => {
     }
 
     case 'SAVE_TOKEN': {
-      const newState = {...state};
-      newState.members.find((x) => x.id == newState.currentUserId).sess_token = action.sess_token;
-      return newState;
+      return {...state, sess_token:action.sess_token}
     }
 
     case 'SAVE_USER_ID': {
