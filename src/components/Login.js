@@ -35,7 +35,21 @@ class LoginComponent extends React.Component {
 
   }
   clickedLoginButton(){
-    this.setState({primary: !this.state.primary});
+    const accessCode = this.refs.accessCode.getValue();
+    const url = 'http://' + C.SERVER_IP + '/connect';
+    axios.post(url, {
+      token: accessCode
+    })
+      .then((x) => x.data)
+      .then((x) => {
+        if (x.code === 0){
+          store.dispatch(userActions.addMember(false, x.user_id, ''));
+          store.dispatch(userActions.setToken(x.sess_token));
+          store.dispatch(userActions.changeUserId(x.user_id));
+
+          store.dispatch(changePage('MAIN'));
+        }
+      })
   }
 
   clickedCreateBoardButton(){
@@ -65,7 +79,7 @@ class LoginComponent extends React.Component {
       <Paper zDepth={4} style={styleTwo}>
         <RaisedButton label="Create board" style={style} onTouchTap={this.clickedCreateBoardButton.bind(this)} />
         <Divider />
-        <TextField hintText="Enter access code" style={style}  />
+        <TextField ref="accessCode"hintText="Enter access code" style={style}  />
         <TextField hintText="IP" style={style} />
         <br />
         <RaisedButton label="Join board"
