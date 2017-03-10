@@ -5,6 +5,9 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {changePage} from '../actions/page';
 import store from '../stores';
+import axios from 'axios';
+import C from '../constants';
+import * as userActions from '../actions/user';
 
 const style = {
   divStyle: {
@@ -36,8 +39,22 @@ class LoginComponent extends React.Component {
   }
 
   clickedCreateBoardButton(){
-    store.dispatch(changePage('MAIN'));
+    const url = 'http://' + C.SERVER_IP + '/create';
+    axios.get(url)
+      .then((x) => x.data)
+      .then((x) => {
+        if (x.code === 0){
+          store.dispatch(userActions.addMember(true, x.user_id, ''));
+          store.dispatch(userActions.setToken(x.sess_token));
+          store.dispatch(userActions.changeUserId(x.user_id));
 
+          store.dispatch(changePage('MAIN'));
+        }
+      })
+      .catch((x) => {
+        alert('error. check console');
+        console.log(x);
+      })
   }
 
   render(){
