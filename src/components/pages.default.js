@@ -9,6 +9,7 @@ import store from '../stores';
 import {changePage} from '../actions/page';
 import Pencil from './pencil'
 import Members from './members'
+import * as socketActions from '../socket.io';
 
 import C from '../constants';
 
@@ -25,10 +26,12 @@ class DefaultPage extends Component{
 
   componentDidMount(){
     this.canvas = ReactDOM.findDOMNode(this.refs.canvas);
-
     this.setListeners();
-
     drawAction.initCanvas(this.canvas, PAGE_WIDTH, PAGE_HEIGHT);
+
+    socketActions.setSessionToken(this.props.user.sess_token);
+    socketActions.connect(C.SERVER_IP);
+    socketActions.sayHilo();
   }
 
   handleClose(){
@@ -154,7 +157,8 @@ class DefaultPage extends Component{
 
 const mapStateToProps = (state) => ({
   pencil: state.pencil,
-  info: state.info
+  info: state.info,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(DefaultPage);
