@@ -10,6 +10,7 @@ import {changePage} from '../actions/page';
 import Pencil from './pencil'
 import Members from './members'
 import * as socketActions from '../socket.io';
+import * as userActions from '../actions/user';
 
 import C from '../constants';
 
@@ -32,6 +33,9 @@ class DefaultPage extends Component{
     socketActions.setSessionToken(this.props.user.sess_token);
     socketActions.connect(C.SERVER_IP);
     socketActions.sayHilo();
+
+    const name = prompt("Enter your name");
+    store.dispatch(userActions.setName(name));
   }
 
   handleClose(){

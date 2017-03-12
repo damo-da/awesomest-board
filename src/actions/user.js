@@ -24,3 +24,10 @@ export const setToken = (token) => {
     sess_token: token
   }
 };
+
+export const setName = (name) => {
+  return {
+    type: 'SET_NAME',
+    name: name
+  }
+};

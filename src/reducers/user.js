@@ -20,6 +20,12 @@ const drawer = (state = initialState, action) => {
       return {...state, currentUserId:action.currentUserId}
     }
 
+    case 'SET_NAME': {
+      const newState = {...state};
+      newState.members.find(x => x.userId == state.currentUserId).name = action.name;
+      return newState;
+    }
+
     default:{
       return state
     }
