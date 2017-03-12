@@ -47,6 +47,10 @@ class LoginComponent extends React.Component {
           store.dispatch(userActions.setToken(x.sess_token));
           store.dispatch(userActions.changeUserId(x.user_id));
 
+          store.dispatch(userActions.replaceMembers(x.members.map(y => {
+            return {name: y.name, userId: y.id, admin: y.admin};
+          })));
+
           store.dispatch(changePage('MAIN'));
         }
       })

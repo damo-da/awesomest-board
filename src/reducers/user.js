@@ -12,6 +12,10 @@ const drawer = (state = initialState, action) => {
       return newState;
     }
 
+    case 'REPLACE_MEMBERS': {
+      return {...state, members:action.members};
+    }
+
     case 'SAVE_TOKEN': {
       return {...state, sess_token:action.sess_token}
     }

@@ -17,6 +17,12 @@ export const changeUserId = (id) => {
   }
 };
 
+export const replaceMembers = (members) => {
+  return {
+    type: 'REPLACE_MEMBERS',
+    members
+  }
+};
 
 export const setToken = (token) => {
   return {
