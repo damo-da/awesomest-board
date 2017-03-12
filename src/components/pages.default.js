@@ -47,24 +47,38 @@ class DefaultPage extends Component{
   getMousePos(e){
     let mouseX, mouseY;
 
-    if (e.offsetX) {
-      mouseX = e.offsetX;
-      mouseY = e.offsetY;
-    }
-    else if (e.layerX) {
-      mouseX = e.layerX;
-      mouseY = e.layerY;
+    if (e.type.indexOf('touch') >= 0){//touch screen
+      const canvasRect = this.canvas.getBoundingClientRect();
+
+      mouseX = e.touches[0].pageX - canvasRect.left;
+      mouseY = e.touches[0].pageY - canvasRect.top;
+
+    }else { //probably using mouse
+      if (e.offsetX) {
+        mouseX = e.offsetX;
+        mouseY = e.offsetY;
+      }
+      else if (e.layerX) {
+        mouseX = e.layerX;
+        mouseY = e.layerY;
+      }
+
+      mouseX = this.width * mouseX / PAGE_WIDTH;
+      mouseY = this.height * mouseY / PAGE_HEIGHT;
     }
 
-    mouseX = this.width * mouseX / PAGE_WIDTH;
-    mouseY = this.height * mouseY / PAGE_HEIGHT;
 
     return {mouseX, mouseY};
   }
 
   setListeners(){
+    this.canvas.addEventListener('touchstart', this.onPressDown.bind(this), false);
     this.canvas.addEventListener('mousedown', this.onPressDown.bind(this), false);
+
     this.canvas.addEventListener('mouseup', this.onPressUp.bind(this), false);
+    this.canvas.addEventListener('touchend', this.onPressUp.bind(this), false);
+
+    this.canvas.addEventListener('touchmove', this.onMove.bind(this), false);
     this.canvas.addEventListener('mousemove', this.onMove.bind(this), false);
   }
 
@@ -125,7 +139,8 @@ class DefaultPage extends Component{
         alert(member.url + 'disconnected from the system.')
       });
 
-    store.dispatch(changePage('LOGIN'));
+
+    // store.dispatch(changePage('LOGIN'));
   }
   getOpenDialog(){
     switch(this.props.info.dialog){
