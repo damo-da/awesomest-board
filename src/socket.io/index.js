@@ -1,5 +1,8 @@
 import io from 'socket.io-client'
 import * as drawActions from '../actions/draw'
+import store from '../stores';
+import * as userAction from '../actions/user'
+
 
 let socket;
 let sess_token;
@@ -7,6 +10,7 @@ let sess_token;
 export function connect(serverName){
   socket = io(serverName);
   socket.on('HILO',function(data){
+    store.dispatch(userAction.addMember(data.admin, data.id, data.name));
   });
   socket.on('DRAW_EVENT',function(options) {
     drawActions.runEvent(...options.data);
