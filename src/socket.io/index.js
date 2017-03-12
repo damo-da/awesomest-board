@@ -16,7 +16,14 @@ export function connect(serverName){
     drawActions.runEvent(...options.data);
   });
   socket.on('KILL',function(data){
-    console.log('Got killed.',data);
+    store.dispatch(userAction.removeMember(data.id));
+
+    const currentUserKilled = store.getState().user.currentUserId == data.id;
+    if(currentUserKilled){
+      alert('You have been suspended by the admin.');
+      window.location.reload();
+
+    }
   });
   socket.on('SET_NAME', function (data) {
     store.dispatch(userAction.setName(data.name, data.id));

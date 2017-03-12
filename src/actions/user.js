@@ -10,6 +10,13 @@ export const addMember = (admin, userId, name='')=>{
 
 };
 
+export const removeMember = (userId) => {
+  return {
+    type: 'REMOVE_MEMBER',
+    userId
+  };
+};
+
 export const changeUserId = (id) => {
   return {
     type: 'SAVE_USER_ID',

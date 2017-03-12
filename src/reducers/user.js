@@ -20,6 +20,12 @@ const drawer = (state = initialState, action) => {
       return {...state, sess_token:action.sess_token}
     }
 
+    case 'REMOVE_MEMBER': {
+      const newState = {...state};
+      newState.members  = newState.members.filter(x => x.userId != action.userId);
+      return newState;
+    }
+
     case 'SAVE_USER_ID': {
       return {...state, currentUserId:action.currentUserId}
     }
