@@ -47,7 +47,7 @@ export default class SingleMember extends Component{
           title={this.props.member.name}>
 
           {/*current user chip*/}
-          {this.props.currentUser.id === this.props.member.id &&
+          {this.props.currentUser.userId === this.props.member.userId &&
           <Chip
             style={styles.chip} backgroundColor={green300}>
             YOU
