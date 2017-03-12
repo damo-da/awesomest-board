@@ -11,6 +11,7 @@ import Pencil from './pencil'
 import Members from './members'
 import * as socketActions from '../socket.io';
 import * as userActions from '../actions/user';
+import axios from 'axios';
 
 import C from '../constants';
 
@@ -114,6 +115,15 @@ class DefaultPage extends Component{
   }
   disconnectUser() {
     this.handleClose();
+
+    const url = 'http://' + C.SERVER_IP + '/kill/';
+    axios.post(url, {
+      sess_token: this.props.user.sess_token
+    })
+      .then((x) => x.data)
+      .then(x => {
+        alert(member.url + 'disconnected from the system.')
+      });
 
     store.dispatch(changePage('LOGIN'));
   }
