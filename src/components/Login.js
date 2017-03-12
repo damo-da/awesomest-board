@@ -77,7 +77,7 @@ class LoginComponent extends React.Component {
 
   render(){
     return <div style={style.divStyle}>
-      <h1 style={style.headerStyle}>Welcome to Awesomest-board</h1>
+      <h1 style={style.headerStyle}>Welcome to Valerie</h1>
 
 
       <Paper zDepth={4} style={styleTwo}>
