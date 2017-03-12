@@ -18,6 +18,10 @@ export function connect(serverName){
   socket.on('KILL',function(data){
     console.log('Got killed.',data);
   });
+  socket.on('SET_NAME', function (data) {
+    store.dispatch(userAction.setName(data.name, data.id));
+  });
+
   return socket;
 }
 

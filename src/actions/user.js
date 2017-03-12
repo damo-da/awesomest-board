@@ -25,9 +25,10 @@ export const setToken = (token) => {
   }
 };
 
-export const setName = (name) => {
+export const setName = (name, userId=null) => {
   return {
     type: 'SET_NAME',
-    name: name
+    name: name,
+    userId: userId
   }
 };

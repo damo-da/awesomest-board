@@ -22,7 +22,9 @@ const drawer = (state = initialState, action) => {
 
     case 'SET_NAME': {
       const newState = {...state};
-      newState.members.find(x => x.userId == state.currentUserId).name = action.name;
+      newState.members
+        .find(x => x.userId == (action.userId !== null? action.userId: state.currentUserId))
+        .name = action.name;
       return newState;
     }
 

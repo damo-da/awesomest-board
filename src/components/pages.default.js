@@ -36,6 +36,7 @@ class DefaultPage extends Component{
 
     const name = prompt("Enter your name");
     store.dispatch(userActions.setName(name));
+    socketActions.setName(name);
   }
 
   handleClose(){
