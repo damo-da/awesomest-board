@@ -62,12 +62,17 @@ class DefaultPage extends Component{
     this.canvas.addEventListener('mousemove', this.onMove.bind(this), false);
   }
 
+  runEvent(...options){
+    socketActions.drawEvent(options);
+    return drawAction.runEvent(...options);
+  }
+
   //onMouseDown, onTouchDown, whatever
   onPressDown(e){
     this.pressed = true;
 
     const {mouseX, mouseY} = this.getMousePos(e);
-    drawAction.runEvent(C.MOUSE_DOWN, mouseX, mouseY, this.props.pencil);
+    this.runEvent(C.MOUSE_DOWN, mouseX, mouseY, this.props.pencil);
   }
 
   //onMouseMove, onTouchMove, whatever
@@ -75,7 +80,7 @@ class DefaultPage extends Component{
     if(!this.pressed) return;
 
     const {mouseX, mouseY} = this.getMousePos(e);
-    drawAction.runEvent(C.MOUSE_MOVE, mouseX, mouseY, this.props.pencil);
+    this.runEvent(C.MOUSE_MOVE, mouseX, mouseY, this.props.pencil);
   }
 
   //onMouseUp, onTouchUp, whatever
@@ -83,7 +88,7 @@ class DefaultPage extends Component{
     this.pressed = false;
 
     const {mouseX, mouseY} = this.getMousePos(e);
-    drawAction.runEvent(C.MOUSE_UP, mouseX, mouseY, this.props.pencil);
+    this.runEvent(C.MOUSE_UP, mouseX, mouseY, this.props.pencil);
   }
 
   createDialog(content, title='Board'){

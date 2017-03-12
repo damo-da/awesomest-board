@@ -7,4 +7,6 @@ const rootReducer = combineReducers({info: page, user, pencil});
 
 const  store = createStore(rootReducer);
 
+window.store = store;
+
 export default store;

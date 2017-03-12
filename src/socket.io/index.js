@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import * as drawActions from '../actions/draw'
 
 let socket;
 let sess_token;
@@ -6,7 +7,12 @@ let sess_token;
 export function connect(serverName){
   socket = io(serverName);
   socket.on('HILO',function(data){
-    console.log("Got hilo.",data);
+  });
+  socket.on('DRAW_EVENT',function(options) {
+    drawActions.runEvent(...options.data);
+  });
+  socket.on('KILL',function(data){
+    console.log('Got killed.',data);
   });
   return socket;
 }
@@ -31,19 +37,10 @@ export function setName(name){
   })
 }
 
-
-/*
-export function drawEvent(){
-  socket.emit('DRAW_EVENT',{
+export function drawEvent(options){
+  socket.emit('DRAW_EVENT', {
     sess_token: sess_token,
-    data:
-  })
+    data: options
+  });
 }
 
-export function listMembers(){
-  socket.emit('LIST_MEMBERS',{
-    sess_token: sess_token,
-    data:
-  })
-}
-*/
