@@ -35,7 +35,7 @@ export default class SingleMember extends Component{
 
     if(member.admin)return false;//can not kick admin
 
-    if(this.props.currentUser.id == member.id)return false; //can not kick self
+    if(this.props.currentUser.userId === member.userId)return false; //can not kick self
 
     return true;
   }

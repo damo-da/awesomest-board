@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import SingleMember from './members.single';
+import axios from 'axios';
+import C from '../constants';
+
 
 export class MembersComponent extends Component{
 
   kickMember(member){
-    alert('Kicking '+ member.name);
+    const url = 'http://' + C.SERVER_IP + '/kill/' + member.userId;
+    axios.post(url, {
+      sess_token: this.props.sess_token
+    })
+      .then((x) => x.data)
+      .then(x=>{
+        alert(member.name + ' kicked from the system.');
+      });
   }
 
   render(){
