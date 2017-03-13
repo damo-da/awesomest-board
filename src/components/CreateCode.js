@@ -36,6 +36,8 @@ export class CreateCode extends React.Component{
   }
   handleClose(){
     this.setState({snackBarOpen: false})
+
+    store.dispatch(pageActions.showDialog(''));
   }
 
   generateNewCode(){
@@ -60,7 +62,7 @@ export class CreateCode extends React.Component{
       actions={[<FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleClose.bind(this)}
       />]}
       modal={false}
       open={true}
