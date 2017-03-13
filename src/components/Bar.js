@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import PencilIcon from 'material-ui/svg-icons/image/brush';
 import EraserIcon from 'material-ui/svg-icons/action/flip-to-front';
+import CreateCodeIcon from 'material-ui/svg-icons/action/launch';
 import MembersIcon from 'material-ui/svg-icons/social/people';
 import ArrowDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down-circle';
 import IconMenu from 'material-ui/IconMenu';
@@ -28,10 +29,6 @@ const styles = {
   }
 };
 export class Bar extends Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   showPencilOptions(){
     store.dispatch(pageActions.showDialog('PENCIL'))
@@ -52,6 +49,22 @@ export class Bar extends Component {
 
   }
 
+  showCreateCode(){
+    store.dispatch(pageActions.showDialog('CREATE_CODE'))
+  }
+
+  showCreateTokenButton(){
+    const currentUser = this.props.members.find(x => x.userId == this.props.currentUserId);
+
+    if (currentUser && currentUser.admin){
+      return <MenuItem
+        primaryText="Create code"
+        leftIcon={<CreateCodeIcon />} onTouchTap={this.showCreateCode.bind(this)}
+      />
+    }
+
+  }
+
   render() {
     return <div className="bar-component">
       <IconMenu
@@ -67,6 +80,7 @@ export class Bar extends Component {
 
         <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
         <MenuItem primaryText="Eraser" leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)}/>
+        {this.showCreateTokenButton()}
         <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)}/>
         <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/>
       </IconMenu>
@@ -80,7 +94,7 @@ Bar.defaultProps = {
 };
 
 
-const mapStateToProps = (state) => state.info;
+const mapStateToProps = (state) => state.user;
 
 export default connect(
   mapStateToProps

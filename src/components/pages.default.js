@@ -9,6 +9,7 @@ import store from '../stores';
 import {changePage} from '../actions/page';
 import Pencil from './pencil'
 import Members from './members'
+import CreateCodeComponent from './CreateCode';
 import * as socketActions from '../socket.io';
 import * as userActions from '../actions/user';
 import axios from 'axios';
@@ -168,6 +169,9 @@ class DefaultPage extends Component{
         >
 
         </Dialog>
+      }
+      case 'CREATE_CODE': {
+        return <CreateCodeComponent />
       }
       default: {
         return null
