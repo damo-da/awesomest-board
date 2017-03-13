@@ -54,6 +54,7 @@ export class Bar extends Component {
   }
 
   showCreateTokenButton(){
+    if(!this.props.members)return;
     const currentUser = this.props.members.find(x => x.userId == this.props.currentUserId);
 
     if (currentUser && currentUser.admin){
