@@ -3,9 +3,6 @@ import {getPencilById} from '../pencils';
 let canvas = null;
 let ctx = null;
 
-let width = 500;
-let height = 500;
-
 window.lastEvent = {}; // this stores the data for the last event by userId
 
 export const initCanvas = (c, w, h) => {
@@ -16,11 +13,11 @@ export const initCanvas = (c, w, h) => {
   canvas.width = w;
   canvas.height = h;
 
-  width = w;
-  height = h;
+  canvas.style.width = w+'px';
+  canvas.style.height = h+'px';
 
   ctx.fillStyle = 'rgb(200,200,200)';
-  ctx.fillRect(0, 0, width, height);
+  ctx.fillRect(0, 0, w, h);
 
   ctx.fillStyle = 'rgb(200,500,200)';
 };

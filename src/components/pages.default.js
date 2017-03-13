@@ -13,24 +13,21 @@ import CreateCodeComponent from './CreateCode';
 import * as socketActions from '../socket.io';
 import * as userActions from '../actions/user';
 import axios from 'axios';
-
+import { WindowResizeListener } from 'react-window-resize-listener'
 import C from '../constants';
-
-const PAGE_WIDTH = 700;
-const PAGE_HEIGHT = 700;
 
 class DefaultPage extends Component{
   pressed = false;
 
   canvas = null;
 
-  width = PAGE_WIDTH;
-  height = PAGE_HEIGHT;
+  width = 0;
+  height = 0;
 
   componentDidMount(){
     this.canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.setListeners();
-    drawAction.initCanvas(this.canvas, PAGE_WIDTH, PAGE_HEIGHT);
+    this.updateWindowSize();
 
     socketActions.setSessionToken(this.props.user.sess_token);
     socketActions.connect(C.SERVER_IP);
@@ -43,6 +40,13 @@ class DefaultPage extends Component{
 
   handleClose(){
     store.dispatch(pageAction.showDialog(''))
+  }
+
+  updateWindowSize(){
+    this.width = document.documentElement.clientWidth;
+    this.height = document.documentElement.clientHeight;
+
+    drawAction.initCanvas(this.canvas, this.width, this.height);
   }
 
   getMousePos(e){
@@ -63,9 +67,6 @@ class DefaultPage extends Component{
         mouseX = e.layerX;
         mouseY = e.layerY;
       }
-
-      mouseX = this.width * mouseX / PAGE_WIDTH;
-      mouseY = this.height * mouseY / PAGE_HEIGHT;
     }
 
 
@@ -182,11 +183,10 @@ class DefaultPage extends Component{
   render(){
     return (
       <div>
-        <h1>Draw</h1>
-
-        <canvas ref='canvas'  style={{width:PAGE_WIDTH, height:PAGE_HEIGHT}}/>
+        <canvas ref='canvas' style={{'overflow': 'hidden'}}/>
 
         {this.getOpenDialog()}
+        <WindowResizeListener onResize={this.updateWindowSize.bind(this)}/>
 
       </div>
     )
