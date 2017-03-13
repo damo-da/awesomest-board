@@ -8,6 +8,7 @@ import store from '../stores';
 import axios from 'axios';
 import C from '../constants';
 import * as userActions from '../actions/user';
+import * as snackBarActions from '../actions/snackBar'
 
 const style = {
   divStyle: {
@@ -40,9 +41,8 @@ class LoginComponent extends React.Component {
     axios.post(url, {
       token: accessCode
     })
-      .then((x) => x.data)
       .then((x) => {
-        if (x.code === 0){
+        if (x.code === 0) {
           store.dispatch(userActions.addMember(false, x.user_id, ''));
           store.dispatch(userActions.setToken(x.sess_token));
           store.dispatch(userActions.changeUserId(x.user_id));
@@ -54,6 +54,14 @@ class LoginComponent extends React.Component {
           store.dispatch(changePage('MAIN'));
         }
       })
+      .catch(x => {
+        if (x && x.response && x.response.status == 406){
+          store.dispatch(snackBarActions.showText('Check your token.'));
+
+        }else{
+          store.dispatch(snackBarActions.showText('Could not connect to server. Please try again'));
+        }
+      });
   }
 
   clickedCreateBoardButton(){
@@ -70,8 +78,11 @@ class LoginComponent extends React.Component {
         }
       })
       .catch((x) => {
-        alert('error. check console');
-        console.log(x);
+        if(x && x.response && x.response == 400){
+          store.dispatch(snackBarActions.showText('There is an existing server'));
+        }else{
+          store.dispatch(snackBarActions.showText('Could not connect to server. Please try again'));
+        }
       })
   }
 

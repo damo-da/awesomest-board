@@ -9,6 +9,7 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import Bar from './Bar';
 import Page from './pages.default';
 import Login from './Login'
+import SnackBar from './SnackBar'
 
 import {Provider} from 'react-redux';
 import store from '../stores';
@@ -39,6 +40,7 @@ export class Main extends React.Component {
             <div>
               {this.getPageComponent()}
               {this.getBar()}
+              <SnackBar/>
             </div>
           </Provider>
         </MuiThemeProvider>
