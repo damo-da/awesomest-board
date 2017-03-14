@@ -8,10 +8,10 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import Snackbar from 'material-ui/Snackbar';
 import axios from 'axios';
 import C from '../constants'
 import * as pageActions from '../actions/page'
+import * as snackBarActions from '../actions/snackBar';
 
 
 const styles = {
@@ -29,14 +29,8 @@ export class CreateCode extends React.Component{
   constructor(props){
     super(props);
 
-    this.state = {
-      snackBarOpen: false
-    };
-
   }
   handleClose(){
-    this.setState({snackBarOpen: false})
-
     store.dispatch(pageActions.showDialog(''));
   }
 
@@ -53,14 +47,14 @@ export class CreateCode extends React.Component{
   }
 
   copiedToClipboard(){
-    this.setState({snackBarOpen: true});
+    store.dispatch(snackBarActions.showText('Code copied to clipboard'));
   }
 
   render(){
     return <Dialog
       title="Create code"
       actions={[<FlatButton
-        label="Cancel"
+        label="Close"
         primary={true}
         onTouchTap={this.handleClose.bind(this)}
       />]}
@@ -70,7 +64,7 @@ export class CreateCode extends React.Component{
       <div >
         Genereate codes to let other members connect. <br />
 
-        <span style={styles.code}>
+        { this.props.info.codeForMembers && <span style={styles.code}>
 
           {this.props.info.codeForMembers}
 
@@ -84,19 +78,11 @@ export class CreateCode extends React.Component{
               <CopyCodeIcon/>
             </CopyToClipboard>
           </IconButton>
-
-
         </span>
+        }
+
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
-
-
-        <Snackbar
-          open={this.state.snackBarOpen}
-          message="Copied code to clipboard"
-          autoHideDuration={4000}
-          onRequestClose={this.handleClose.bind(this)}
-        />
 
       </div>
     </Dialog>
