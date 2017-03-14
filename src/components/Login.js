@@ -10,23 +10,34 @@ import C from '../constants';
 import * as userActions from '../actions/user';
 import * as snackBarActions from '../actions/snackBar'
 
-const style = {
-  divStyle: {
-    display: 'block',
-    textAlign: 'center',
+
+const styles = {
+  wrapper: {
+    width: '100%',
+    marginTop: '12%',
+    textAlign: 'center'
   },
-  headerStyle: {
-    textAlign: 'center',
+  innerWrapper: {
+    display: 'inline-block'
   },
-
+  paper: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 15,
+    paddingRight: 15
+  },
+  createBtn: {
+    marginBottom: 15,
+  },
+  title: {
+    marginBottom: '10%'
+  },
+  separatorText: {
+    margin: 20,
+    color: 'gray',
+    fontSize: 'x-large'
+  }
 };
-
-const styleTwo = {
-  marginLeft: 550,
-  width: 500,
-  borderRadius: 10,
-};
-
 
 class LoginComponent extends React.Component {
   constructor(){
@@ -87,23 +98,25 @@ class LoginComponent extends React.Component {
   }
 
   render(){
-    return <div style={style.divStyle}>
-      <h1 style={style.headerStyle}>Welcome to Valerie</h1>
+    return <div style={styles.wrapper}>
+      <div style={styles.innerWrapper}>
+          <h1 style={styles.title}>Welcome to Valerie</h1>
 
 
-      <Paper zDepth={4} style={styleTwo}>
-        <RaisedButton label="Create board" style={style} onTouchTap={this.clickedCreateBoardButton.bind(this)} />
-        <Divider />
-        <TextField ref="accessCode"hintText="Enter access code" style={style}  />
-        <TextField hintText="IP" style={style} />
-        <br />
-        <RaisedButton label="Join board"
-                      primary={this.state.primary}
-                      secondary={!this.state.primary}
-                      style={style}
-                      onTouchTap={this.clickedLoginButton.bind(this)} />
+          <Paper zDepth={4} style={styles.paper} >
+            <RaisedButton label="Create board" style={styles.createBtn} onTouchTap={this.clickedCreateBoardButton.bind(this)} />
+            <div style={styles.separatorText}>
+              OR
+            </div>
+            <TextField ref="accessCode"hintText="Enter access code" fullWidth={true} />
+            <TextField hintText="Server address" fullWidth={true} />
+            <RaisedButton label="Join board"
+                          primary={this.state.primary}
+                          secondary={!this.state.primary}
+                          onTouchTap={this.clickedLoginButton.bind(this)} />
 
-      </Paper>
+          </Paper>
+      </div>
     </div>
   }
 }
