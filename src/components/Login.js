@@ -53,6 +53,9 @@ class LoginComponent extends React.Component {
       token: accessCode
     })
       .then((x) => {
+        if (!x.data)throw Error('no data found');
+        x = x.data;
+
         if (x.code === 0) {
           store.dispatch(userActions.addMember(false, x.user_id, ''));
           store.dispatch(userActions.setToken(x.sess_token));
