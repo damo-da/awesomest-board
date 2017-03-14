@@ -65,7 +65,7 @@ export default class SingleMember extends Component{
           {/*kick this member button*/}
           {this.isKickable() &&
           <RaisedButton
-            label="Kick this f**ker"
+            label="Kick member"
             secondary={true}
             onTouchTap={this.props.onKick.bind(this)}
             style={{margin: 12}}/>
