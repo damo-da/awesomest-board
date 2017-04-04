@@ -16,7 +16,7 @@ import axios from 'axios';
 import { WindowResizeListener } from 'react-window-resize-listener'
 import C from '../constants';
 
-class DefaultPage extends Component{
+export class DefaultPage extends Component{
   pressed = false;
 
   canvas = null;
@@ -89,6 +89,11 @@ class DefaultPage extends Component{
     return drawAction.runEvent(...options);
   }
 
+  runClearEvent(){
+    socketActions.clearBoardClient();
+    console.log("Hello from runClearEvent in default******************");
+  }
+
   //onMouseDown, onTouchDown, whatever
   onPressDown(e){
     this.pressed = true;
@@ -131,7 +136,8 @@ class DefaultPage extends Component{
   }
 
   clearBoard() {
-    this.canvas.getContext('2d').clearRect(0, 0, this.width, this.height);
+    this.handleClose();
+    drawAction.initCanvas(this.canvas, this.width, this.height);
   }
 
   disconnectUser() {
@@ -160,6 +166,7 @@ class DefaultPage extends Component{
           actions={[<FlatButton
             label='Yes'
             primary={true}
+            //runClearEvent for trying to broadcast to all
             onTouchTap={this.clearBoard.bind(this)}
           />, <FlatButton
             label="No"
