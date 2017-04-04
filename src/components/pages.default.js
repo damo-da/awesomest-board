@@ -129,6 +129,11 @@ class DefaultPage extends Component{
     </Dialog>
 
   }
+
+  clearBoard() {
+    this.canvas.getContext('2d').clearRect(0, 0, this.width, this.height);
+  }
+
   disconnectUser() {
     this.handleClose();
 
@@ -148,6 +153,24 @@ class DefaultPage extends Component{
     switch(this.props.info.dialog){
       case 'PENCIL': {
         return this.createDialog(<Pencil/>, 'Pencil')
+      }
+      case 'CLEAR_BOARD': {
+        return <Dialog
+          title={'Clear the board?'}
+          actions={[<FlatButton
+            label='Yes'
+            primary={true}
+            onTouchTap={this.clearBoard.bind(this)}
+          />, <FlatButton
+            label="No"
+            secondary={true}
+            onTouchTap={this.handleClose.bind(this)}
+          />]}
+          modal={false}
+          open={true}
+          onRequestClose={this.handleClose.bind(this)}
+        />
+
       }
       case 'MEMBERS': {
         return this.createDialog(<Members />, 'Members')

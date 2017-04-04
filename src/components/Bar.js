@@ -9,6 +9,7 @@ import EraserIcon from 'material-ui/svg-icons/action/flip-to-front';
 import CreateCodeIcon from 'material-ui/svg-icons/action/launch';
 import MembersIcon from 'material-ui/svg-icons/social/people';
 import ArrowDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down-circle';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -37,6 +38,11 @@ export class Bar extends Component {
 
   eraser(){
     store.dispatch(pageActions.showDialog('ERASER'))
+
+  }
+
+  clearBoard(){
+    store.dispatch(pageActions.showDialog('CLEAR_BOARD'))
 
   }
 
@@ -81,6 +87,7 @@ export class Bar extends Component {
 
         <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
         <MenuItem primaryText="Eraser" leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)}/>
+        <MenuItem primaryText="Clear" leftIcon={<DeleteIcon />} onTouchTap={this.clearBoard.bind(this)}/>
         {this.showCreateTokenButton()}
         <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)}/>
         <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/>
