@@ -131,6 +131,8 @@ class DefaultPage extends Component{
   }
 
   clearBoard() {
+    this.handleClose();
+
     this.canvas.getContext('2d').clearRect(0, 0, this.width, this.height);
   }
 
