@@ -30,8 +30,8 @@ export function connect(serverName){
   socket.on('SET_NAME', function (data) {
     store.dispatch(userAction.setName(data.name, data.id));
   });
-  socket.on('CLEAR_BOARD', function (data) {
-    DefaultPage.clearBoard(data);
+  socket.on('CLEAR_BOARD', function () {
+    DefaultPage.clearBoard();
   });
   return socket;
 }
@@ -64,8 +64,8 @@ export function drawEvent(options){
   });
 }
 
+
 export function clearBoardClient() {
-  console.log("hello from clearBoardClient side^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
   socket.emit('CLEAR_BOARD', {
     sess_token: sess_token,
     data: null

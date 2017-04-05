@@ -89,6 +89,7 @@ export class DefaultPage extends Component{
     return drawAction.runEvent(...options);
   }
 
+  //emits CLEAR_BOARD from client to server
   runClearEvent(){
     socketActions.clearBoardClient();
     console.log("Hello from runClearEvent in default******************");
@@ -135,6 +136,7 @@ export class DefaultPage extends Component{
 
   }
 
+  //Clears the board
   clearBoard() {
     this.handleClose();
     drawAction.initCanvas(this.canvas, this.width, this.height);
@@ -167,7 +169,7 @@ export class DefaultPage extends Component{
             label='Yes'
             primary={true}
             //runClearEvent for trying to broadcast to all
-            onTouchTap={this.clearBoard.bind(this)}
+            onTouchTap={this.runClearEvent.bind(this)}
           />, <FlatButton
             label="No"
             secondary={true}
