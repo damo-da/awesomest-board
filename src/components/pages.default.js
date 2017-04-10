@@ -84,7 +84,7 @@ export class DefaultPage extends Component{
     this.canvas.addEventListener('mousemove', this.onMove.bind(this), false);
   }
 
-  static runEvent(...options){
+  runEvent(...options){
     socketActions.drawEvent(options);
     return drawAction.runEvent(...options);
   }
