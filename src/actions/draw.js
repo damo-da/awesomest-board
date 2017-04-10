@@ -38,3 +38,8 @@ export const runEvent = (action, x, y, pencilData, userId=0) => {
 };
 
 
+export const clearBoard = () => {
+  if (canvas){
+    initCanvas(canvas, canvas.width, canvas.height);
+  }
+};

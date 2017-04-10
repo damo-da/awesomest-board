@@ -2,7 +2,6 @@ import io from 'socket.io-client'
 import * as drawActions from '../actions/draw'
 import store from '../stores';
 import * as userAction from '../actions/user'
-import {DefaultPage} from '../components/pages.default';
 
 let socket;
 let sess_token;
@@ -31,7 +30,7 @@ export function connect(serverName){
     store.dispatch(userAction.setName(data.name, data.id));
   });
   socket.on('CLEAR_BOARD', function () {
-    DefaultPage.clearBoard();
+    drawActions.clearBoard();
   });
   return socket;
 }

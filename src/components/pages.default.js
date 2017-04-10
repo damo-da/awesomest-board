@@ -84,15 +84,17 @@ export class DefaultPage extends Component{
     this.canvas.addEventListener('mousemove', this.onMove.bind(this), false);
   }
 
-  runEvent(...options){
+  static runEvent(...options){
     socketActions.drawEvent(options);
     return drawAction.runEvent(...options);
   }
 
   //emits CLEAR_BOARD from client to server
   runClearEvent(){
-    socketActions.clearBoardClient();
-    console.log("Hello from runClearEvent in default******************");
+    if(this.props.user.members.find(x => x.userId==this.props.user.currentUserId).admin ){
+      socketActions.clearBoardClient();
+      drawAction.clearBoard()
+    }
   }
 
   //onMouseDown, onTouchDown, whatever
@@ -138,8 +140,8 @@ export class DefaultPage extends Component{
 
   //Clears the board
   clearBoard() {
-    this.handleClose();
     drawAction.initCanvas(this.canvas, this.width, this.height);
+    this.handleClose();
   }
 
   disconnectUser() {
