@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import store from '../stores';
 import {changePage} from '../actions/page';
 import Pencil from './pencil'
+import Eraser from './eraser'
 import Members from './members'
 import CreateCodeComponent from './CreateCode';
 import * as socketActions from '../socket.io';
@@ -93,7 +94,8 @@ export class DefaultPage extends Component{
   runClearEvent(){
     if(this.props.user.members.find(x => x.userId==this.props.user.currentUserId).admin ){
       socketActions.clearBoardClient();
-      drawAction.clearBoard()
+      drawAction.clearBoard();
+      this.handleClose();
     }
   }
 
@@ -138,12 +140,6 @@ export class DefaultPage extends Component{
 
   }
 
-  //Clears the board
-  clearBoard() {
-    drawAction.initCanvas(this.canvas, this.width, this.height);
-    this.handleClose();
-  }
-
   disconnectUser() {
     this.handleClose();
 
@@ -164,9 +160,12 @@ export class DefaultPage extends Component{
       case 'PENCIL': {
         return this.createDialog(<Pencil/>, 'Pencil')
       }
+      case 'ERASER': {
+        return this.createDialog(<Eraser/>, 'Eraser')
+      }
       case 'CLEAR_BOARD': {
         return <Dialog
-          title={'Clear the board?'}
+          title={'Are you sure?'}
           actions={[<FlatButton
             label='Yes'
             primary={true}
