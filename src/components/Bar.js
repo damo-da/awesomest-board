@@ -73,6 +73,7 @@ export class Bar extends Component {
   }
 
   render() {
+    const currentUser = this.props.members.find(x => x.userId == this.props.currentUserId);
     return <div className="bar-component">
       <IconMenu
         style={styles.iconMenu}
@@ -87,7 +88,11 @@ export class Bar extends Component {
 
         <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
         <MenuItem primaryText="Eraser" leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)}/>
-        <MenuItem primaryText="Clear" leftIcon={<DeleteIcon />} onTouchTap={this.clearBoard.bind(this)}/>
+
+        {currentUser && currentUser.admin &&
+            <MenuItem primaryText="Clear" leftIcon={<DeleteIcon />} onTouchTap={this.clearBoard.bind(this)}/>
+        }
+
         {this.showCreateTokenButton()}
         <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)}/>
         <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/>
