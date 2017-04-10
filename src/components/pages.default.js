@@ -94,6 +94,7 @@ export class DefaultPage extends Component{
     if(this.props.user.members.find(x => x.userId==this.props.user.currentUserId).admin ){
       socketActions.clearBoardClient();
       drawAction.clearBoard()
+      this.handleClose();
     }
   }
 
@@ -136,12 +137,6 @@ export class DefaultPage extends Component{
       {content}
     </Dialog>
 
-  }
-
-  //Clears the board
-  clearBoard() {
-    drawAction.initCanvas(this.canvas, this.width, this.height);
-    this.handleClose();
   }
 
   disconnectUser() {
