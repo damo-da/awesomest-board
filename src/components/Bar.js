@@ -95,7 +95,9 @@ export class Bar extends Component {
 
         {this.showCreateTokenButton()}
         <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)}/>
-        <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/>
+
+        {currentUser && !currentUser.admin &&
+        <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/> }
       </IconMenu>
     </div>
   }
