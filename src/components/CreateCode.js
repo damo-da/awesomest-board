@@ -35,7 +35,7 @@ export class CreateCode extends React.Component{
   }
 
   componentWillMount(){
-    axios.get(`http://${C.SERVER_IP}/ips`)
+    axios.get(`http://${C.SERVER_FULL_ADDRESS}/ips`)
       .then(x => x.data)
       .then(x => {
         this.setState({ips: x.ips});
@@ -48,7 +48,7 @@ export class CreateCode extends React.Component{
   }
 
   generateNewCode(){
-    const url = `http://${C.SERVER_IP}/createCode`;
+    const url = `http://${C.SERVER_FULL_ADDRESS}/createCode`;
     axios.post(url, {
       sess_token: this.props.user.sess_token
     })

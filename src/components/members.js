@@ -8,7 +8,7 @@ import C from '../constants';
 export class MembersComponent extends Component{
 
   kickMember(member){
-    const url = 'http://' + C.SERVER_IP + '/kill/' + member.userId;
+    const url = 'http://' + C.SERVER_FULL_ADDRESS + '/kill/' + member.userId;
     axios.post(url, {
       sess_token: this.props.sess_token
     })

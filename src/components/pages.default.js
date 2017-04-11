@@ -30,7 +30,7 @@ export class DefaultPage extends Component{
     this.updateWindowSize();
 
     socketActions.setSessionToken(this.props.user.sess_token);
-    socketActions.connect(C.SERVER_IP);
+    socketActions.connect(C.SERVER_FULL_ADDRESS);
     socketActions.sayHilo();
 
     const name = prompt("Enter your name");
@@ -147,7 +147,7 @@ export class DefaultPage extends Component{
   disconnectUser() {
     this.handleClose();
 
-    const url = 'http://' + C.SERVER_IP + '/kill/';
+    const url = 'http://' + C.SERVER_FULL_ADDRESS + '/kill/';
     axios.post(url, {
       sess_token: this.props.user.sess_token
     })

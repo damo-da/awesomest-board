@@ -3,5 +3,7 @@ export default {
   MOUSE_UP: 'MOUSE_UP',
   MOUSE_MOVE: 'MOUSE_MOVE',
 
-  SERVER_IP: 'localhost:3000'
+  SERVER_FULL_ADDRESS: 'localhost:3000', //hostname:port
+
+  SERVER_PORT: 3000
 }

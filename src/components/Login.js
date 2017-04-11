@@ -9,6 +9,7 @@ import axios from 'axios';
 import C from '../constants';
 import * as userActions from '../actions/user';
 import * as snackBarActions from '../actions/snackBar'
+import {isValidIp} from '../utils';
 
 
 const styles = {
@@ -46,9 +47,26 @@ class LoginComponent extends React.Component {
     this.state = {primary: true};
 
   }
+
+  //validate and convert server address into
+  getServerAddress(){
+    const userInput = this.refs.serverAddress.getValue();
+    if(isValidIp(userInput)){
+      return `${userInput}:${C.SERVER_PORT}`;
+    }
+
+  }
   clickedLoginButton(){
     const accessCode = this.refs.accessCode.getValue();
-    const url = 'http://' + C.SERVER_IP + '/connect';
+    const serverAddress = this.getServerAddress();
+
+    if(!serverAddress)
+      return store.dispatch(snackBarActions.showText('Please enter a valid server address'));
+
+    //Although this is a constant. We're updating the constant value here. This is a FEATURE, rely on this.
+    C.SERVER_FULL_ADDRESS = serverAddress;
+
+    const url = 'http://' + C.SERVER_FULL_ADDRESS + '/connect';
     axios.post(url, {
       token: accessCode
     })
@@ -79,7 +97,7 @@ class LoginComponent extends React.Component {
   }
 
   clickedCreateBoardButton(){
-    const url = 'http://' + C.SERVER_IP + '/create';
+    const url = 'http://' + C.SERVER_FULL_ADDRESS + '/create';
     axios.get(url)
       .then((x) => x.data)
       .then((x) => {
@@ -111,8 +129,8 @@ class LoginComponent extends React.Component {
             <div style={styles.separatorText}>
               OR
             </div>
-            <TextField ref="accessCode"hintText="Enter access code" fullWidth={true} />
-            <TextField hintText="Server address" fullWidth={true} />
+            <TextField ref="accessCode" hintText="Enter access code" fullWidth={true} />
+            <TextField ref="serverAddress" hintText="Server address" fullWidth={true} />
             <RaisedButton label="Join board"
                           primary={this.state.primary}
                           secondary={!this.state.primary}
