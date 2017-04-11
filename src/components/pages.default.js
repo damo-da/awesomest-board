@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import store from '../stores';
 import {changePage} from '../actions/page';
 import Pencil from './pencil'
-import Eraser from './eraser'
+import Eraser from './Eraser'
 import Members from './members'
 import CreateCodeComponent from './CreateCode';
 import * as socketActions from '../socket.io';
