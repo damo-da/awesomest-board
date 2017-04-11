@@ -29,7 +29,20 @@ export class CreateCode extends React.Component{
   constructor(props){
     super(props);
 
+    this.state = {ips: [
+    ]};
+
   }
+
+  componentWillMount(){
+    axios.get(`http://${C.SERVER_IP}/ips`)
+      .then(x => x.data)
+      .then(x => {
+        this.setState({ips: x.ips});
+      });
+
+  }
+
   handleClose(){
     store.dispatch(pageActions.showDialog(''));
   }
@@ -83,6 +96,13 @@ export class CreateCode extends React.Component{
 
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
+
+        <h3>Server IPs</h3>
+        {this.state.ips.map(x =>
+          <div>
+            {x}
+          </div>
+        )}
 
       </div>
     </Dialog>
