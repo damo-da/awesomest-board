@@ -98,8 +98,8 @@ export class CreateCode extends React.Component{
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
 
         <h3>Server IPs</h3>
-        {this.state.ips.map(x =>
-          <div>
+        {this.state.ips.map((x,index) =>
+          <div key={index}>
             {x}
           </div>
         )}
