@@ -97,12 +97,25 @@ export class CreateCode extends React.Component{
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
 
-        <h3>Server IPs</h3>
-        {this.state.ips.map((x,index) =>
-          <div key={index}>
-            {x}
-          </div>
-        )}
+        <h2>Server IPs</h2>
+        Try these IPs at your friend's device.
+        <div style={{textAlign: 'center'}}>
+          {this.state.ips.map((x, index) =>
+            <span key={index} style={{...styles.code, margin: 10, width: 220, display: 'inline-block'}}>
+              {x}
+              <IconButton
+                iconStyle={styles.smallIcon}
+                style={styles.small}
+                tooltip={"Copy IP to clipboard"}>
+                <CopyToClipboard
+                  text={x}
+                  onCopy={this.copiedToClipboard.bind(this)}>
+                  <CopyCodeIcon/>
+                </CopyToClipboard>
+              </IconButton>
+            </span>
+          )}
+        </div>
 
       </div>
     </Dialog>
