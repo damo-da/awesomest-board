@@ -70,7 +70,7 @@ export class DefaultPage extends Component{
     }
 
 
-    return {mouseX, mouseY};
+    return {mouseX: mouseX/this.width, mouseY: mouseY/this.height};
   }
 
   setListeners(){
