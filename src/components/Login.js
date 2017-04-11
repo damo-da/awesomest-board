@@ -97,6 +97,8 @@ class LoginComponent extends React.Component {
   }
 
   clickedCreateBoardButton(){
+    C.SERVER_FULL_ADDRESS = `${C.DEFAULT_SERVER_IP}:${C.SERVER_PORT}`;
+
     const url = 'http://' + C.SERVER_FULL_ADDRESS + '/create';
     axios.get(url)
       .then((x) => x.data)
