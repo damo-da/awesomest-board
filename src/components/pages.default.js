@@ -214,9 +214,11 @@ export class DefaultPage extends Component{
   }
 
   render(){
+    const eraserActive = this.props.pencil.color == C.ERASER_HEX;
+
     return (
       <div>
-        <canvas ref='canvas' style={{'overflow': 'hidden'}}/>
+        <canvas ref='canvas' style={{overflow: 'hidden', cursor: eraserActive?'context-menu':'pointer'}}/>
 
         {this.getOpenDialog()}
         <WindowResizeListener onResize={this.updateWindowSize.bind(this)}/>

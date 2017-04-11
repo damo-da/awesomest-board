@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import Slider from 'material-ui/Slider';
 import * as pencilActions from '../actions/pencil';
 import RaisedButton from 'material-ui/RaisedButton';
+import C from '../constants'
 
 const WIDTH_1 = 350;
 const BRUSH_SIZE_MULTIPLIER = 70; // when slider is full, pencil becomes 70 pixels
-const bgColor = '#c8c8c8';
+const bgColor = C.ERASER_HEX;
 
 class EraserPage extends Component {
 

@@ -6,5 +6,7 @@ export default {
   SERVER_FULL_ADDRESS: '', //hostname:port
 
   SERVER_PORT: 3000,
-  DEFAULT_SERVER_IP: 'localhost'
+  DEFAULT_SERVER_IP: 'localhost',
+
+  ERASER_HEX: '#c8c8c8'
 }
