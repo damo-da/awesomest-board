@@ -8,7 +8,6 @@ import FlatButton from 'material-ui/FlatButton';
 import store from '../stores';
 import {changePage} from '../actions/page';
 import Pencil from './pencil'
-import Eraser from './Eraser'
 import Members from './members'
 import CreateCodeComponent from './CreateCode';
 import * as socketActions from '../socket.io';
@@ -160,9 +159,6 @@ export class DefaultPage extends Component{
       case 'PENCIL': {
         return this.createDialog(<Pencil/>, 'Pencil')
       }
-      case 'ERASER': {
-        return this.createDialog(<Eraser/>, 'Eraser')
-      }
       case 'CLEAR_BOARD': {
         return <Dialog
           title={'Are you sure?'}
@@ -214,7 +210,7 @@ export class DefaultPage extends Component{
   }
 
   render(){
-    const eraserActive = this.props.pencil.color == C.ERASER_HEX;
+    const eraserActive = this.props.pencil.type == 'ERASER';
 
     return (
       <div>
