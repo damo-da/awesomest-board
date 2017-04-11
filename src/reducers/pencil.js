@@ -30,17 +30,13 @@ const pencil = (state = initialState, action) => {
     }
 
     case 'CHANGE_BRUSH_TYPE': {
-      console.log('changing brush type', state, action);
       if(action.brushType == 'ERASER'){
-        console.log('type is eraser');
         if(state.type == 'ERASER') //wants to change from eraser to eraser. do nothing
           return state;
 
-        console.log('toggling eraser');
         // change to eraser otherwise.
         return pencil(state, {type: 'TOGGLE_ERASER'});
       }else{
-        console.log('changing to something else');
         if(state.type == 'ERASER'){
           lastBrushType = action.brushType;
           return pencil(state, {type: 'TOGGLE_ERASER'})
