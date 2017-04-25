@@ -43,8 +43,8 @@ export class DefaultPage extends Component{
   }
 
   updateWindowSize(){
-    this.width = document.documentElement.clientWidth;
-    this.height = document.documentElement.clientHeight;
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
 
     drawAction.initCanvas(this.canvas, this.width, this.height);
   }
