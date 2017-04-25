@@ -19,6 +19,4 @@ export const load = () => {
 };
 
 
-if (typeof process == 'undefined' && !process.versions['electron']) {
-  load();
-}
+load();
