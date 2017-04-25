@@ -5,11 +5,20 @@ import App from './components/Main';
 import {Provider} from 'react-redux';
 import store from './stores';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+
+
+export const load = () => {
+  injectTapEventPlugin();
 
 // Render the main component into the dom
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider> ,document.getElementById('app'));
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>, document.getElementById('app'));
+};
+
+
+if (typeof process == 'undefined' && !process.versions['electron']) {
+  load();
+}
