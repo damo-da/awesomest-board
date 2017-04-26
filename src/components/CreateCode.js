@@ -13,14 +13,14 @@ import C from '../constants'
 import * as pageActions from '../actions/page'
 import * as snackBarActions from '../actions/snackBar';
 
-
 const styles = {
   code: {
-    padding: 9,
-    background: 'lightgray',
   },
   generateCodeBtn: {
 
+
+  },
+  sendCodeBtn: {
 
   }
 };
@@ -45,6 +45,21 @@ export class CreateCode extends React.Component{
       })
 
   }
+  /*
+  Attempting to pass values to backend routes file
+
+  sendCodeSMS(){
+    const url = `http://${C.SERVER_IP}/sendCode`;
+    axios.post(url, {
+      sess_token: this.props.user.sess_token,
+      joinToken: this.props.user.joinToken,
+    })
+      .then(x => x.data)
+      .then(x => {
+        store.dispatch(pageActions.handlePhoneChange(x.data))
+      })
+  }
+  */
 
   copiedToClipboard(){
     store.dispatch(snackBarActions.showText('Code copied to clipboard'));
@@ -78,11 +93,21 @@ export class CreateCode extends React.Component{
               <CopyCodeIcon/>
             </CopyToClipboard>
           </IconButton>
+          <form>
+          <div>
+            <h3>
+              Enter a phone number below to send a code
+            </h3>
+            <TextField name = 'phoneNumber' hintText = '+12224447777' label='Phone Number'/>
+          </div>
+        </form>
         </span>
         }
 
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <RaisedButton label="Send Code" primary={true} style={styles.sendCodeBtn} onTouchTap={this.sendCodeSMS.bind(this)}/>
 
       </div>
     </Dialog>
