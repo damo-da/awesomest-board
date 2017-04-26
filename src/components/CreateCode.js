@@ -58,8 +58,6 @@ export class CreateCode extends React.Component{
       })
 
   }
-  /*
-  Attempting to pass values to backend routes file
 
   sendCodeSMS(){
     const url = `http://${C.SERVER_IP}/sendCode`;
@@ -72,7 +70,7 @@ export class CreateCode extends React.Component{
         store.dispatch(pageActions.handlePhoneChange(x.data))
       })
   }
-  */
+
 
   copiedToClipboard(){
     store.dispatch(snackBarActions.showText('Code copied to clipboard'));
