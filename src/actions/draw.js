@@ -43,3 +43,10 @@ export const clearBoard = () => {
     initCanvas(canvas, canvas.width, canvas.height);
   }
 };
+
+export const saveImage = () => {
+  var canvas = document.getElementById("mycanvas");
+  var img    = canvas.toDataURL("image/png");
+
+  document.write('<img src="'+img+'"/>');
+}

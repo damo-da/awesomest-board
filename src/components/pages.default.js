@@ -98,6 +98,17 @@ export class DefaultPage extends Component{
     }
   }
 
+  saveImageEvent(){
+      this.canvas.toDataURL('image/png')
+      var gh = this.canvas.toDataURL('png');
+
+      var a  = document.createElement('a');
+      a.href = gh;
+      a.download = 'image.png';
+      a.click()
+  this.handleClose();
+  }
+
   //onMouseDown, onTouchDown, whatever
   onPressDown(e){
     this.pressed = true;
@@ -181,6 +192,25 @@ export class DefaultPage extends Component{
       case 'MEMBERS': {
         return this.createDialog(<Members />, 'Members')
       }
+
+      case 'SAVE_IMAGE': {
+        return <Dialog
+          title={'Are you sure you want to save the image?'}
+          actions={[<FlatButton
+            label='Yes'
+            primary={true}
+            onTouchTap={this.saveImageEvent.bind(this)}
+          />, <FlatButton
+            label="No"
+            secondary={true}
+            onTouchTap={this.handleClose.bind(this)}
+          />]}
+          modal={false}
+          open={true}
+          onRequestClose={this.handleClose.bind(this)}
+        />
+      }
+
       case 'DISCONNECT': {
         return <Dialog
           title={'Are you sure?'}
