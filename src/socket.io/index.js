@@ -9,12 +9,10 @@ let sess_token;
 export function connect(serverName){
   socket = io(serverName);
   socket.on('HILO',function(data){
-    console.log("Hello from HILO in connect in client");
     store.dispatch(userAction.addMember(data.admin, data.id, data.name));
   });
   socket.on('DRAW_EVENT',function(options) {
     drawActions.runEvent(...options.data);
-    console.log("Hello from DRAW_EVENT in connect function in clientside");
   });
   socket.on('KILL',function(data){
     store.dispatch(userAction.removeMember(data.id));
@@ -56,7 +54,6 @@ export function setName(name){
 }
 
 export function drawEvent(options){
-  console.log("Hello from drawEvent in clientside");
   socket.emit('DRAW_EVENT', {
     sess_token: sess_token,
     data: options

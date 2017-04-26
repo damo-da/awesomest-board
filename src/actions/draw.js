@@ -33,7 +33,7 @@ const draw = (x, y, pencilId='DEFAULT', size=10, color='#0000ff', type='', userI
 };
 
 export const runEvent = (action, x, y, pencilData, userId=0) => {
-  draw(x, y, pencilData.pencil, pencilData.size, pencilData.color, action, userId);
+  draw(x * canvas.width, y*canvas.height, pencilData.pencil, pencilData.size, pencilData.color, action, userId);
 
 };
 

@@ -29,13 +29,26 @@ export class CreateCode extends React.Component{
   constructor(props){
     super(props);
 
+    this.state = {ips: [
+    ]};
+
   }
+
+  componentWillMount(){
+    axios.get(`http://${C.SERVER_FULL_ADDRESS}/ips`)
+      .then(x => x.data)
+      .then(x => {
+        this.setState({ips: x.ips});
+      });
+
+  }
+
   handleClose(){
     store.dispatch(pageActions.showDialog(''));
   }
 
   generateNewCode(){
-    const url = `http://${C.SERVER_IP}/createCode`;
+    const url = `http://${C.SERVER_FULL_ADDRESS}/createCode`;
     axios.post(url, {
       sess_token: this.props.user.sess_token
     })
@@ -108,6 +121,26 @@ export class CreateCode extends React.Component{
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <RaisedButton label="Send Code" primary={true} style={styles.sendCodeBtn} onTouchTap={this.sendCodeSMS.bind(this)}/>
+
+        <h2>Server IPs</h2>
+        Try these IPs at your friend's device.
+        <div style={{textAlign: 'center'}}>
+          {this.state.ips.map((x, index) =>
+            <span key={index} style={{...styles.code, margin: 10, width: 220, display: 'inline-block'}}>
+              {x}
+              <IconButton
+                iconStyle={styles.smallIcon}
+                style={styles.small}
+                tooltip={"Copy IP to clipboard"}>
+                <CopyToClipboard
+                  text={x}
+                  onCopy={this.copiedToClipboard.bind(this)}>
+                  <CopyCodeIcon/>
+                </CopyToClipboard>
+              </IconButton>
+            </span>
+          )}
+        </div>
 
       </div>
     </Dialog>

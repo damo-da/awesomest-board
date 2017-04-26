@@ -8,7 +8,6 @@ import FlatButton from 'material-ui/FlatButton';
 import store from '../stores';
 import {changePage} from '../actions/page';
 import Pencil from './pencil'
-import Eraser from './eraser'
 import Members from './members'
 import CreateCodeComponent from './CreateCode';
 import * as socketActions from '../socket.io';
@@ -31,7 +30,7 @@ export class DefaultPage extends Component{
     this.updateWindowSize();
 
     socketActions.setSessionToken(this.props.user.sess_token);
-    socketActions.connect(C.SERVER_IP);
+    socketActions.connect(C.SERVER_FULL_ADDRESS);
     socketActions.sayHilo();
 
     const name = prompt("Enter your name");
@@ -44,8 +43,8 @@ export class DefaultPage extends Component{
   }
 
   updateWindowSize(){
-    this.width = document.documentElement.clientWidth;
-    this.height = document.documentElement.clientHeight;
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
 
     drawAction.initCanvas(this.canvas, this.width, this.height);
   }
@@ -71,7 +70,7 @@ export class DefaultPage extends Component{
     }
 
 
-    return {mouseX, mouseY};
+    return {mouseX: mouseX/this.width, mouseY: mouseY/this.height};
   }
 
   setListeners(){
@@ -143,7 +142,7 @@ export class DefaultPage extends Component{
   disconnectUser() {
     this.handleClose();
 
-    const url = 'http://' + C.SERVER_IP + '/kill/';
+    const url = 'http://' + C.SERVER_FULL_ADDRESS + '/kill/';
     axios.post(url, {
       sess_token: this.props.user.sess_token
     })
@@ -159,9 +158,6 @@ export class DefaultPage extends Component{
     switch(this.props.info.dialog){
       case 'PENCIL': {
         return this.createDialog(<Pencil/>, 'Pencil')
-      }
-      case 'ERASER': {
-        return this.createDialog(<Eraser/>, 'Eraser')
       }
       case 'CLEAR_BOARD': {
         return <Dialog
@@ -214,9 +210,11 @@ export class DefaultPage extends Component{
   }
 
   render(){
+    const eraserActive = this.props.pencil.type == 'ERASER';
+
     return (
       <div>
-        <canvas ref='canvas' style={{'overflow': 'hidden'}}/>
+        <canvas ref='canvas' style={{overflow: 'hidden', cursor: eraserActive?'context-menu':'pointer'}}/>
 
         {this.getOpenDialog()}
         <WindowResizeListener onResize={this.updateWindowSize.bind(this)}/>

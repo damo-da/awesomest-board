@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import store from '../stores';
-import * as pageActions from '../actions/page';
 import {connect} from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -12,6 +11,8 @@ import ArrowDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down-circ
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import * as pageActions from '../actions/page';
+import * as pencilActions from '../actions/pencil';
 
 const styles = {
   arrowDown: {
@@ -37,8 +38,7 @@ export class Bar extends Component {
   }
 
   eraser(){
-    store.dispatch(pageActions.showDialog('ERASER'))
-
+    setTimeout(() => store.dispatch(pencilActions.toggleEraser()), 300);
   }
 
   clearBoard(){
@@ -60,8 +60,8 @@ export class Bar extends Component {
   }
 
   showCreateTokenButton(){
-    if(!this.props.members)return;
-    const currentUser = this.props.members.find(x => x.userId == this.props.currentUserId);
+    if(!this.props.user.members)return;
+    const currentUser = this.props.user.members.find(x => x.userId == this.props.user.currentUserId);
 
     if (currentUser && currentUser.admin){
       return <MenuItem
@@ -73,7 +73,7 @@ export class Bar extends Component {
   }
 
   render() {
-    const currentUser = this.props.members.find(x => x.userId == this.props.currentUserId);
+    const currentUser = this.props.user.members.find(x => x.userId == this.props.user.currentUserId);
     return <div className="bar-component">
       <IconMenu
         style={styles.iconMenu}
@@ -87,7 +87,7 @@ export class Bar extends Component {
         targetOrigin={{horizontal: 'right', vertical: 'top'}}>
 
         <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
-        <MenuItem primaryText="Eraser" leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)}/>
+        <MenuItem primaryText={this.props.pencil.type == 'ERASER'?"Deactivate eraser":"Activate Eraser"} leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)}/>
 
         {currentUser && currentUser.admin &&
             <MenuItem primaryText="Clear" leftIcon={<DeleteIcon />} onTouchTap={this.clearBoard.bind(this)}/>
@@ -95,7 +95,9 @@ export class Bar extends Component {
 
         {this.showCreateTokenButton()}
         <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)}/>
-        <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/>
+
+        {currentUser && !currentUser.admin &&
+        <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/> }
       </IconMenu>
     </div>
   }
@@ -107,7 +109,10 @@ Bar.defaultProps = {
 };
 
 
-const mapStateToProps = (state) => state.user;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  pencil: state.pencil
+});
 
 export default connect(
   mapStateToProps
