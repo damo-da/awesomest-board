@@ -99,14 +99,12 @@ export class DefaultPage extends Component{
   }
 
   saveImageEvent(){
-      this.canvas.toDataURL('image/png')
+      this.canvas.toDataURL('image/png');
       var gh = this.canvas.toDataURL('png');
-
       var a  = document.createElement('a');
       a.href = gh;
-      a.download = 'image.png';
-      a.click()
-  this.handleClose();
+      a.download = 'canvas.png';
+      a.click(this.handleClose());
   }
 
   //onMouseDown, onTouchDown, whatever
