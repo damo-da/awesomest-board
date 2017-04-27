@@ -3,12 +3,13 @@ import store from '../stores';
 import {connect} from 'react-redux';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import PencilIcon from 'material-ui/svg-icons/image/brush';
-import EraserIcon from 'material-ui/svg-icons/action/flip-to-front';
+import PaletteIcon from 'material-ui/svg-icons/image/palette';
+import PencilEraserIcon from 'material-ui/svg-icons/image/edit';
 import CreateCodeIcon from 'material-ui/svg-icons/action/launch';
 import MembersIcon from 'material-ui/svg-icons/social/people';
 import ArrowDownIcon from 'material-ui/svg-icons/navigation/arrow-drop-down-circle';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import PaintBucketIcon from 'material-ui/svg-icons/editor/format-color-fill';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import * as pageActions from '../actions/page';
@@ -39,6 +40,10 @@ export class Bar extends Component {
 
   eraser(){
     setTimeout(() => store.dispatch(pencilActions.toggleEraser()), 300);
+  }
+
+  paintBucket(){
+    store.dispatch(pageActions.showDialog('PAINT_BUCKET'))
   }
 
   clearBoard(){
@@ -86,8 +91,10 @@ export class Bar extends Component {
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
         targetOrigin={{horizontal: 'right', vertical: 'top'}}>
 
-        <MenuItem primaryText="Pencil" leftIcon={<PencilIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
-        <MenuItem primaryText={this.props.pencil.type == 'ERASER'?"Deactivate eraser":"Activate Eraser"} leftIcon={<EraserIcon />} onTouchTap={this.eraser.bind(this)}/>
+        <MenuItem primaryText="Color and Size" leftIcon={<PaletteIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
+        <MenuItem primaryText={this.props.pencil.type == 'ERASER'?"Activate Pencil":"Activate Eraser"} leftIcon={<PencilEraserIcon />} onTouchTap={this.eraser.bind(this)}/>
+
+        <MenuItem primaryText="Paint Bucket" leftIcon={<PaintBucketIcon />} onTouchTap={this.paintBucket.bind(this)}/>
 
         {currentUser && currentUser.admin &&
             <MenuItem primaryText="Clear" leftIcon={<DeleteIcon />} onTouchTap={this.clearBoard.bind(this)}/>

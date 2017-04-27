@@ -88,7 +88,7 @@ export class CreateCode extends React.Component{
       open={true}
       onRequestClose={this.handleClose.bind(this)} >
       <div >
-        Genereate codes to let other members connect. <br />
+        Generate codes to let other members connect. <br />
 
         { this.props.info.codeForMembers && <span style={styles.code}>
 
