@@ -104,24 +104,13 @@ export class CreateCode extends React.Component{
               <CopyCodeIcon/>
             </CopyToClipboard>
           </IconButton>
-          <form>
-          <div>
-            <h3>
-              Enter a phone number below to send a code
-            </h3>
-            <TextField name = 'phoneNumber' hintText = '+12224447777' label='Phone Number'/>
-          </div>
-        </form>
         </span>
         }
-
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        <RaisedButton label="Send Code" primary={true} style={styles.sendCodeBtn} onTouchTap={this.sendCodeSMS.bind(this)}/>
 
         <h2>Server IPs</h2>
-        Try these IPs at your friend's device.
+        Try these IPs on your friend's device.
         <div style={{textAlign: 'center'}}>
           {this.state.ips.map((x, index) =>
             <span key={index} style={{...styles.code, margin: 10, width: 220, display: 'inline-block'}}>
@@ -140,12 +129,23 @@ export class CreateCode extends React.Component{
           )}
         </div>
 
+        <br></br>
+        <form>
+          <div>
+            <h2>
+              Enter a phone number below to send a code
+            </h2>
+            <TextField name = 'phoneNumber' hintText = '+12224447777' label='Phone Number'/>
+          </div>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <RaisedButton label="Send Code" primary={true} style={styles.sendCodeBtn}/>
+        </form>
       </div>
     </Dialog>
   }
-
 }
-
 
 const mapStateToProps = (state) => ({
   info: state.info,

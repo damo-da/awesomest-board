@@ -10,7 +10,6 @@ import IconButton from 'material-ui/IconButton';
 
 import EraserBrushIcon from 'material-ui/svg-icons/action/flip-to-front';
 import PencilBrushIcon from 'material-ui/svg-icons/image/brush';
-import PaintBucketIcon from 'material-ui/svg-icons/editor/format-color-fill';
 
 const WIDTH_1 = 350;
 const BRUSH_SIZE_MULTIPLIER = 70; // when slider is full, pencil becomes 70 pixels
@@ -63,8 +62,7 @@ class PencilPage extends Component{
     this.setState({
       data:[
       {name: 'Pencil', key: 'PENCIL', icon: <PencilBrushIcon />},
-      {name: 'Eraser', key: 'ERASER', icon: <EraserBrushIcon />},
-        {name: 'Paint Bucket', key: 'PAINT_BUCKET', icon: <PaintBucketIcon />},
+      {name: 'Eraser', key: 'ERASER', icon: <EraserBrushIcon />}
     ]}
     );
   }

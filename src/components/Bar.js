@@ -39,10 +39,6 @@ export class Bar extends Component {
 
   }
 
-  eraser(){
-    setTimeout(() => store.dispatch(pencilActions.toggleEraser()), 300);
-  }
-
   paintBucket(){
     store.dispatch(pageActions.showDialog('PAINT_BUCKET'))
   }
@@ -99,7 +95,6 @@ export class Bar extends Component {
         targetOrigin={{horizontal: 'right', vertical: 'top'}}>
 
         <MenuItem primaryText="Color and Size" leftIcon={<PaletteIcon />} onTouchTap={this.showPencilOptions.bind(this)}/>
-        <MenuItem primaryText={this.props.pencil.type == 'ERASER'?"Activate Pencil":"Activate Eraser"} leftIcon={<PencilEraserIcon />} onTouchTap={this.eraser.bind(this)}/>
 
         <MenuItem primaryText="Paint Bucket" leftIcon={<PaintBucketIcon />} onTouchTap={this.paintBucket.bind(this)}/>
 

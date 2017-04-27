@@ -100,8 +100,8 @@ export class DefaultPage extends Component{
 
   saveImageEvent(){
       this.canvas.toDataURL('image/png');
-      var gh = this.canvas.toDataURL('png');
-      var a  = document.createElement('a');
+      const gh = this.canvas.toDataURL('png');
+      let a  = document.createElement('a');
       a.href = gh;
       a.download = 'canvas.png';
       a.click(this.handleClose());
