@@ -12,6 +12,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import PaintBucketIcon from 'material-ui/svg-icons/editor/format-color-fill';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import PhotoIcon from 'material-ui/svg-icons/image/add-a-photo';
 import * as pageActions from '../actions/page';
 import * as pencilActions from '../actions/pencil';
 
@@ -55,6 +56,12 @@ export class Bar extends Component {
     store.dispatch(pageActions.showDialog('MEMBERS'))
 
   }
+
+  saveImage(){
+    store.dispatch(pageActions.showDialog('SAVE_IMAGE'))
+
+  }
+
   disconnect(){
     store.dispatch(pageActions.showDialog('DISCONNECT'))
 
@@ -102,6 +109,7 @@ export class Bar extends Component {
 
         {this.showCreateTokenButton()}
         <MenuItem primaryText="Members" leftIcon={<MembersIcon />} onTouchTap={this.members.bind(this)}/>
+        <MenuItem primaryText="Save Image" leftIcon={<PhotoIcon />} onTouchTap={this.saveImage.bind(this)}/>
 
         {currentUser && !currentUser.admin &&
         <MenuItem primaryText="Disconnect" leftIcon={<NavigationClose />} onTouchTap={this.disconnect.bind(this)}/> }
