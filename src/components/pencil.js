@@ -75,11 +75,15 @@ class PencilPage extends Component{
 
         <div style={styles.leftBox}>
           {/*Size of brush*/}
-          Size
-          <Slider defaultValue={this.props.size / BRUSH_SIZE_MULTIPLIER} style={{width: WIDTH_1}}
-                  onChange={ this.handleSizeChange }/>
+          {this.props.type != 'PAINT_BUCKET' &&
+          <Slider
+            defaultValue={this.props.size / BRUSH_SIZE_MULTIPLIER}
+            style={{width: WIDTH_1}}
+            onChange={ this.handleSizeChange }/>
+          }
 
           {/*Color*/}
+          &nbsp;
           {this.props.type != 'ERASER' &&
           <CirclePicker
             color={this.props.color}
