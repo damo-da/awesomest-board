@@ -99,12 +99,8 @@ export class DefaultPage extends Component{
   }
 
   saveImageEvent(){
-      this.canvas.toDataURL('image/png');
-      const gh = this.canvas.toDataURL('png');
-      let a  = document.createElement('a');
-      a.href = gh;
-      a.download = 'canvas.png';
-      a.click(this.handleClose());
+      drawAction.saveCanvas();
+      this.handleClose();
   }
 
   //onMouseDown, onTouchDown, whatever
@@ -245,8 +241,7 @@ export class DefaultPage extends Component{
         <canvas ref='canvas' style={{overflow: 'hidden', cursor: eraserActive?'context-menu':'pointer'}}/>
 
         {this.getOpenDialog()}
-        <WindowResizeListener onResize={this.updateWindowSize.bind(this)}/>
-
+        /*<WindowResizeListener onResize={this.resizeCanvasImage.bind(this)}/>*/
       </div>
     )
 
