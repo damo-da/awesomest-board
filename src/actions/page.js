@@ -19,3 +19,10 @@ export const changeCreateCode = (code) => {
     code
   };
 };
+
+export const handlePhoneChange = (phoneNumber) => {
+  return {
+    type: 'PHONE_NUMBER',
+    phoneNumber: phoneNumber
+  };
+};

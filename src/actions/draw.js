@@ -43,3 +43,12 @@ export const clearBoard = () => {
     initCanvas(canvas, canvas.width, canvas.height);
   }
 };
+
+export const saveCanvas = () => {
+  canvas.toDataURL('image/png');
+  const drawingString = canvas.toDataURL('png');
+  let a  = document.createElement('a');
+  a.href = drawingString;
+  a.download = 'canvas.png';
+  a.click();
+};

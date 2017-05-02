@@ -13,14 +13,14 @@ import C from '../constants'
 import * as pageActions from '../actions/page'
 import * as snackBarActions from '../actions/snackBar';
 
-
 const styles = {
   code: {
-    padding: 9,
-    background: 'lightgray',
   },
   generateCodeBtn: {
 
+
+  },
+  sendCodeBtn: {
 
   }
 };
@@ -59,6 +59,19 @@ export class CreateCode extends React.Component{
 
   }
 
+  sendCodeSMS(){
+    const url = `http://${C.SERVER_IP}/sendCode`;
+    axios.post(url, {
+      sess_token: this.props.user.sess_token,
+      joinToken: this.props.user.joinToken,
+    })
+      .then(x => x.data)
+      .then(x => {
+        store.dispatch(pageActions.handlePhoneChange(x.data))
+      })
+  }
+
+
   copiedToClipboard(){
     store.dispatch(snackBarActions.showText('Code copied to clipboard'));
   }
@@ -75,7 +88,7 @@ export class CreateCode extends React.Component{
       open={true}
       onRequestClose={this.handleClose.bind(this)} >
       <div >
-        Genereate codes to let other members connect. <br />
+        Generate codes to let other members connect. <br />
 
         { this.props.info.codeForMembers && <span style={styles.code}>
 
@@ -93,12 +106,11 @@ export class CreateCode extends React.Component{
           </IconButton>
         </span>
         }
-
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <RaisedButton label="Generate new code" secondary={true} style={styles.generateCodeBtn} onTouchTap={this.generateNewCode.bind(this)}/>
 
         <h2>Server IPs</h2>
-        Try these IPs at your friend's device.
+        Try these IPs on your friend's device.
         <div style={{textAlign: 'center'}}>
           {this.state.ips.map((x, index) =>
             <span key={index} style={{...styles.code, margin: 10, width: 220, display: 'inline-block'}}>
@@ -117,12 +129,23 @@ export class CreateCode extends React.Component{
           )}
         </div>
 
+        <br></br>
+        <form>
+          <div>
+            <h2>
+              Enter a phone number below to send a code
+            </h2>
+            <TextField name = 'phoneNumber' hintText = '+12224447777' label='Phone Number'/>
+          </div>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <RaisedButton label="Send Code" primary={true} style={styles.sendCodeBtn}/>
+        </form>
       </div>
     </Dialog>
   }
-
 }
-
 
 const mapStateToProps = (state) => ({
   info: state.info,

@@ -99,6 +99,11 @@ export class DefaultPage extends Component{
     }
   }
 
+  saveImageEvent(){
+      drawAction.saveCanvas();
+      this.handleClose();
+  }
+
   //onMouseDown, onTouchDown, whatever
   onPressDown(e){
     this.pressed = true;
@@ -209,6 +214,25 @@ export class DefaultPage extends Component{
           />
         </Dialog>
       }
+
+      case 'SAVE_IMAGE': {
+        return <Dialog
+          title={'Are you sure you want to save the image?'}
+          actions={[<FlatButton
+            label='Yes'
+            primary={true}
+            onTouchTap={this.saveImageEvent.bind(this)}
+          />, <FlatButton
+            label="No"
+            secondary={true}
+            onTouchTap={this.handleClose.bind(this)}
+          />]}
+          modal={false}
+          open={true}
+          onRequestClose={this.handleClose.bind(this)}
+        />
+      }
+
       case 'DISCONNECT': {
         return <Dialog
           title={'Are you sure?'}
