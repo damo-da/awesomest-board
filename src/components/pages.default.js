@@ -269,7 +269,7 @@ export class DefaultPage extends Component{
         <canvas ref='canvas' style={{overflow: 'hidden', cursor: eraserActive?'context-menu':'pointer'}}/>
 
         {this.getOpenDialog()}
-        <WindowResizeListener onResize={this.updateWindowSize.bind(this)}/>
+        {/*<WindowResizeListener onResize={this.updateWindowSize.bind(this)}/>*/}
 
       </div>
     )
