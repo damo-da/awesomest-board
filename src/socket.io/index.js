@@ -30,6 +30,10 @@ export function connect(serverName){
   socket.on('CLEAR_BOARD', function () {
     drawActions.clearBoard();
   });
+  socket.on('ALL_DATA', (data) => {
+    drawActions.clearBoard();
+    data.data.forEach(d => drawActions.runEvent(...d));
+  });
   return socket;
 }
 
