@@ -68,7 +68,7 @@ export class Bar extends Component {
   }
 
   showCreateTokenButton(){
-    if(!this.props.user.members)return;
+    if(!this.props.user || !this.props.user.members)return;
     const currentUser = this.props.user.members.find(x => x.userId == this.props.user.currentUserId);
 
     if (currentUser && currentUser.admin){
@@ -81,7 +81,7 @@ export class Bar extends Component {
   }
 
   render() {
-    const currentUser = this.props.user.members.find(x => x.userId == this.props.user.currentUserId);
+    const currentUser = this.props.user && this.props.user.members.find(x => x.userId == this.props.user.currentUserId);
     return <div className="bar-component">
       <IconMenu
         style={styles.iconMenu}
