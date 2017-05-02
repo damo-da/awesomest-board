@@ -15,6 +15,8 @@ import * as userActions from '../actions/user';
 import axios from 'axios';
 import { WindowResizeListener } from 'react-window-resize-listener'
 import C from '../constants';
+import TextField from 'material-ui/TextField';
+
 
 export class DefaultPage extends Component{
   pressed = false;
@@ -33,9 +35,8 @@ export class DefaultPage extends Component{
     socketActions.connect(C.SERVER_FULL_ADDRESS);
     socketActions.sayHilo();
 
-    const name = prompt("Enter your name");
-    store.dispatch(userActions.setName(name));
-    socketActions.setName(name);
+    store.dispatch(pageAction.showDialog('ENTER_NAME'));
+
   }
 
   handleClose(){
@@ -154,6 +155,15 @@ export class DefaultPage extends Component{
 
     // store.dispatch(changePage('LOGIN'));
   }
+
+  setName(){
+    const name = this.refs.name.getValue();
+
+    store.dispatch(userActions.setName(name));
+    socketActions.setName(name);
+
+    this.handleClose();
+  }
   getOpenDialog(){
     switch(this.props.info.dialog){
       case 'PENCIL': {
@@ -180,6 +190,24 @@ export class DefaultPage extends Component{
       }
       case 'MEMBERS': {
         return this.createDialog(<Members />, 'Members')
+      }
+      case 'ENTER_NAME': {
+        return <Dialog
+          title={'Please enter your name'}
+          actions={[<FlatButton
+          label='DONE'
+          primary={true}
+          onTouchTap={this.setName.bind(this)} />]}
+          modal={false}
+          open={true}
+          onRequestClose={this.handleClose.bind(this)}
+          >
+          <TextField
+            ref="name"
+            hintText="Your name here"
+            fullWidth={true}
+          />
+        </Dialog>
       }
       case 'DISCONNECT': {
         return <Dialog
