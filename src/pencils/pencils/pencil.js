@@ -17,10 +17,12 @@ class Pencil extends BasePencil {
         ctx.beginPath();
         ctx.lineWidth=radius/2.0;
         ctx.moveTo(x, y);
+        break;
       }
       case C.MOUSE_MOVE:{
         ctx.lineTo(x,y);
         ctx.stroke();
+        break;
 
       }
       case C.MOUSE_UP: {

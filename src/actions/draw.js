@@ -4,7 +4,7 @@ let canvas = null;
 let ctx = null;
 
 window.lastEvent = {}; // this stores the data for the last event by userId
-const events = [];
+let events = [];
 
 export const initCanvas = (c, w, h) => {
   canvas = c;
@@ -43,6 +43,7 @@ export const runEvent = (action, x, y, pencilData, userId = 0) => {
 
 
 export const clearBoard = () => {
+  events = [];
   if (canvas) {
     initCanvas(canvas, canvas.width, canvas.height);
   }
