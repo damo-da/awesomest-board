@@ -132,7 +132,7 @@ class LoginComponent extends React.Component {
               OR
             </div>
             <TextField ref="accessCode" hintText="Enter access code" fullWidth={true} />
-            <TextField ref="serverAddress" hintText="Server address" fullWidth={true} />
+            <TextField ref="serverAddress" hintText="Server IP" fullWidth={true} />
             <RaisedButton label="Join board"
                           primary={this.state.primary}
                           secondary={!this.state.primary}
