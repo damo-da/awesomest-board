@@ -23,7 +23,7 @@ export class MembersComponent extends Component{
 
     const members = this.props.members.map((member) => {
         return <SingleMember
-          key={member.id}
+          key={member.userId}
           member={member}
           currentUser={currentUser}
           onKick={this.kickMember.bind(this, member)}/>;
